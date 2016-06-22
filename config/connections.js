@@ -28,10 +28,12 @@ module.exports.connections = {
   * Installed by default.                                                    *
   *                                                                          *
   ***************************************************************************/
-  localDiskDb: {
-    adapter: 'sails-disk'
+  localMemory: {
+    adapter: 'sails-memory'
   },
-
+  testDB: {
+    adapter: 'sails-memory'
+  }
   /***************************************************************************
   *                                                                          *
   * MySQL is the world's most popular relational database.                   *

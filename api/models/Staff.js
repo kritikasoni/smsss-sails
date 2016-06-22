@@ -9,26 +9,42 @@ module.exports = {
   tableName: 'staffs',
   attributes: {
     firstName: {
-      type: 'string'
+      type: 'string',
+      required : true ,
+      minLength: 3,
+      maxLength: 64
     },
     lastName: {
-      type: 'string'
+      type: 'string',
+      required : true,
+      minLength: 3,
+      maxLength: 64
     },
     email:{
       type:'string',
-      unique:true
+      unique:true,
+      required : true,
+      email: true
     },
     password:{
-      type:'string'
+      type:'string',
+      required : true,
+      minLength: 6,
+      maxLength: 20
     },
     position:{
-      type:'string'
+      type:'string',
+      required : true,
+      minLength: 3,
+      maxLength: 64
     },
     roleId:{
-      model:'role'
+      model:'role',
+      required : true
     },
     departmentId:{
-      model:'department'
+      model:'department',
+      required : true
     }
   }
 };

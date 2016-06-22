@@ -9,7 +9,8 @@ module.exports = {
   tableName: 'roles',
   attributes: {
     name:{
-      type:'string'
+      type:'string',
+      required : true
     }
   }
 };

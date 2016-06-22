@@ -6,10 +6,12 @@
  */
 
 module.exports = {
-  tableName: 'departments',
+  tableName: 'departments', 
   attributes: {
     name:{
-      type:'string'
+      type:'string',
+      required : true,
+      minLength: 2
     }
   }
 };
