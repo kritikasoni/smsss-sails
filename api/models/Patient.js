@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  tableName: 'staffs',
+  tableName: 'patients',
   attributes: {
     firstName: {
       type: 'string',

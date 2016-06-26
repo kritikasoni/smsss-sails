@@ -7,21 +7,23 @@
 
 module.exports = {
   tableName: 'appointments',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     date: {
       type: 'dateTime',
       required : true ,
 
     },
-    roomId:{
+    room:{
       model:'room',
       required : true
     },
-    patientId:{
+    patient:{
       model:'patient',
       required : true
     },
-    doctorId:{
+    doctor:{
       model:'staff',
       required : true
     }

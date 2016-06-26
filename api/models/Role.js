@@ -7,6 +7,8 @@
 
 module.exports = {
   tableName: 'roles',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     name:{
       type:'string',

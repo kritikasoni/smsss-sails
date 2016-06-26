@@ -7,6 +7,8 @@
 
 module.exports = {
   tableName: 'rooms',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     name: {
       type: 'string',

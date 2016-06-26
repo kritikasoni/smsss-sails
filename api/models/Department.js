@@ -6,7 +6,9 @@
  */
 
 module.exports = {
-  tableName: 'departments', 
+  tableName: 'departments',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     name:{
       type:'string',

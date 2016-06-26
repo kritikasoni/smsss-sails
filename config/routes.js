@@ -45,5 +45,21 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'post /staffs' : 'StaffController.create' ,
+  'post /staffs' : 'StaffController.create',
+  /*
+  *  Doctor routes
+  */
+  'get /doctors'   : 'DoctorController.findAll',
+  'get /doctors/:id' : 'DoctorController.findById',
+  'post /doctors'   : 'DoctorController.create',
+  'put /doctors/:id'    : 'DoctorController.update',
+  'delete /doctors/:id'  :'DoctorController.delete',
+  /*
+  * Nurse routes
+  */
+  'get /nurses'   : 'NurseController.findAll',
+  'get /nurses/:id' : 'NurseController.findById',
+  'post /nurses'   : 'NurseController.create',
+  'put /nurses/:id'    : 'NurseController.update',
+  'delete /nurses/:id'  :'NurseController.delete',
 };

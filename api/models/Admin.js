@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  tableName: 'staffs',
+  tableName: 'admins',
   attributes: {
     firstName: {
       type: 'string',
@@ -32,20 +32,9 @@ module.exports = {
       minLength: 6,
       maxLength: 20
     },
-    position:{
-      type:'string',
-      required : true,
-      minLength: 3,
-      maxLength: 64
-    },
-    role:{
-      model:'role',
-      required : true
-    },
-    department:{
-      model:'department',
-      required : true
-    }
+
+   
   }
 };
+
 

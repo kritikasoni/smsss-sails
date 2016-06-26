@@ -1,21 +1,19 @@
 var request = require('supertest');
 
-describe('StaffController', function() {
+describe('AdminController', function() {
 
-  describe('#create doctor()', function() {
+  describe('#create admin()', function() {
     it('should success when data is correct', function (done) {
-      const doctor = {
+      const admin = {
         firstName: 'Daenerys',
         lastName: 'Targaryen',
         email: 'dt@hotmail.com',
         password: '123456',
-        position: 'Orthopedics consultant',
-        roleId: '1',
-        departmentId:'1'
+        role: '1',
       };
       request(sails.hooks.http.app)
-        .post('/staff')
-        .send(doctor)
+        .post('/admins')
+        .send(admin)
         .type('json')
         .expect(201)
         .end(function(err, res) {
@@ -29,18 +27,18 @@ describe('StaffController', function() {
     });
 
     it('should fail when data is incorrect', function (done) {
-      const doctor = {
+      const admin = {
         firstName: 'Daenerys',
         lastName: 'Targaryen',
         email: 'dt@hotmail.com',
         password: '123',
         position: 'Orthopedics consultant',
-        roleId: '1',
-        departmentId:'1'
+        role: '1',
+        department:'1'
       };
       request(sails.hooks.http.app)
-        .post('/staff')
-        .send(doctor)
+        .post('/admins')
+        .send(admin)
         .type('json')
         .expect(400)
         .end(function(err, res) {
