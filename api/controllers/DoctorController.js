@@ -9,7 +9,7 @@ module.exports = {
 	findAll: (req,res) => {
     Staff
       .find()
-      .populate('role',{where: { name:'doctor'} })
+      .populateAll()
       .then(doctors => res.json(doctors))
       .catch(err => res.ok(err));
   },
