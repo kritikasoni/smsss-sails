@@ -62,4 +62,30 @@ module.exports.routes = {
   'post /nurses'   : 'NurseController.create',
   'put /nurses/:id'    : 'NurseController.update',
   'delete /nurses/:id'  :'NurseController.delete',
+  /*
+   * Medicine routes
+   */
+  'get /medicines'   : 'MedicineController.findAll',
+  'get /medicines/:id' : 'MedicineController.findById',
+  'post /medicines'   : 'MedicineController.create',
+  'put /medicines/:id'    : 'MedicineController.update',
+  'delete /medicines/:id'  :'MedicineController.delete',
+
+  /*
+   * MedicinePrescription routes
+   */
+  'get /medicinePrescription'   : 'MedicinePrescriptionController.findAll',
+  'get /medicinePrescription/:id' : 'MedicinePrescriptionController.findById',
+  'post /medicinePrescription'   : 'MedicinePrescriptionController.create',
+  'put /medicinePrescription/:id'    : 'MedicinePrescriptionController.update',
+  'delete /medicinePrescription/:id'  :'MedicinePrescriptionController.delete',
+
+  /*
+   * Prescription routes
+   */
+  'get /prescriptions'   : 'MedicinePrescriptionController.findAll',
+  'get /prescriptions/:id' : 'MedicinePrescriptionController.findById',
+  'post /prescriptions'   : 'MedicinePrescriptionController.create',
+  'put /prescriptions/:id'    : 'MedicinePrescriptionController.update',
+  'delete /prescriptions/:id'  :'MedicinePrescriptionController.delete',
 };
