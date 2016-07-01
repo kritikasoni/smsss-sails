@@ -83,9 +83,9 @@ module.exports.routes = {
   /*
    * Prescription routes
    */
-  'get /prescriptions'   : 'MedicinePrescriptionController.findAll',
-  'get /prescriptions/:id' : 'MedicinePrescriptionController.findById',
-  'post /prescriptions'   : 'MedicinePrescriptionController.create',
-  'put /prescriptions/:id'    : 'MedicinePrescriptionController.update',
-  'delete /prescriptions/:id'  :'MedicinePrescriptionController.delete',
+  'get /prescriptions'   : 'PrescriptionController.findAll',
+  'get /prescriptions/:id' : 'PrescriptionController.findById',
+  'post /prescriptions'   : 'PrescriptionController.create',
+  'put /prescriptions/:id'    : 'PrescriptionController.update',
+  'delete /prescriptions/:id'  :'PrescriptionController.delete',
 };

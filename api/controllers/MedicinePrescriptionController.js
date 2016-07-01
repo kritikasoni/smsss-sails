@@ -14,7 +14,7 @@ module.exports = {
       .catch(err => res.ok(err));
   },
   findById: (req,res) => {
-    medicinePrescription
+    MedicinePrescription
       .findOne({id:req.params.id}).populateAll()
       .then(medicinePrescription => res.json(medicinesPrescriptions))
       .catch(err => res.ok(err));
@@ -22,7 +22,7 @@ module.exports = {
 
   create: function (req, res) {
     let medicinePrescription = req.body;
-    medicinePrescription
+    MedicinePrescription
       .create(medicinePrescription)
       .then(medicinePrescription => medicinePrescription.findOne({id:medicinePrescription.id}).populateAll())
       .then(medicinePrescription => res.created(medicinePrescription))

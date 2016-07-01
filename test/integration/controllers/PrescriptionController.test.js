@@ -5,9 +5,8 @@ describe('PrescriptionController', function() {
   describe('#create prescription()', function() {
     it('should success when data is correct', function (done) {
       const prescription = {
-       createdDate: '12-11-1954' ,
-       patient: 'Kritika' ,
-       doctor: 'Khal' 
+       patient: '1' ,
+       doctor: '1'
       };
       request(sails.hooks.http.app)
         .post('/prescriptions')
@@ -27,9 +26,8 @@ describe('PrescriptionController', function() {
 
     it('should fail when data is incorrect', function (done) {
       const prescription = {
-        createdDate: '12-11-' ,
-        patient: 'K' ,
-        doctor: 'Khal'
+        patient: '2' ,
+        doctor: '5'
       };
       request(sails.hooks.http.app)
         .post('/prescriptions')

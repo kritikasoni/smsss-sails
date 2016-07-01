@@ -22,8 +22,19 @@ module.exports = {
 
   create: function (req, res) {
     let prescription = req.body;
-    Prescription
-      .create(prescription)
+    Staff
+      .findOne({id:req.body.doctor})
+      .then(doctor => {
+        if(!doctor) throw new Error('Doctor not found');
+        return doctor;
+      })
+      .then(() => {
+        Patient.findOne({id:req.body.patient}).then(patient => {
+          if(!patient) throw new Error('Patient not found');
+          return patient;
+        })
+      })
+      .then(() => Prescription.create(prescription))
       .then(prescription => Prescription.findOne({id:prescription.id}).populateAll())
       .then(prescription => res.created(prescription))
       .catch(err => res.badRequest(err));

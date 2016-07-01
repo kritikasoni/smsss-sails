@@ -33,8 +33,8 @@ describe('MedicineController', function() {
         detail: 'Used for killing bacteria',
       };
         request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/medicines')
+        .send(medicine)
         .type('json')
         .expect(400)
         .end(function(err, res) {
