@@ -12,7 +12,7 @@ module.exports = {
       type: 'string',
       required : true ,
       minLength: 3,
-      maxLength: 64
+      maxLength: 512
     },
 
     patient:{

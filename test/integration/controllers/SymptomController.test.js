@@ -1,14 +1,18 @@
 var request = require('supertest');
 
 describe('SymptomController', function() {
-
-  describe('#find()', function() {
-    it('should return 2 roles', function (done) {
+  describe('#create symptom()', function() {
+    it('should success when data is correct', function (done) {
+      const symptom = {
+        detail: 'has problem with the arms',
+        patient: '1',
+      };
       request(sails.hooks.http.app)
-        .get('/symptoms')
-        .expect(200)
+        .post('/symptoms')
+        .send(symptom)
+        .type('json')
+        .expect(201)
         .end(function(err, res) {
-          // console.log(res.body);
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
@@ -17,6 +21,7 @@ describe('SymptomController', function() {
           else done(null, res);
         });
     });
+
   });
 
 });
