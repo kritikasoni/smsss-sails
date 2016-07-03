@@ -16,7 +16,7 @@ module.exports = {
   findById: (req,res) => {
     Medicine
       .findOne({id:req.params.id}).populateAll()
-      .then(medicine => res.json(medicines))
+      .then(medicine => res.json(medicine))
       .catch(err => res.ok(err));
   },
 
