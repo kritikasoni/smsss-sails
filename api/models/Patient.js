@@ -26,11 +26,12 @@ module.exports = {
       unique:true,
       required : true,
       email: true
+      //เพิ่ม password ไหม
     },
     idCardNo:{
       type:'string',
       required : true,
-     
+
       minLength: 13,
       maxLength: 13
     },
@@ -43,7 +44,6 @@ module.exports = {
     weight:{
       type:'float',
       required : true,
-      
 
       min: 1,
       max: 500
@@ -58,7 +58,7 @@ module.exports = {
     phone:{
       type:'string',
       required : true,
-      
+
       minLength: 9,
       maxLength: 10
     },

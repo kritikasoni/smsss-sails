@@ -88,4 +88,10 @@ module.exports.routes = {
   'post /prescriptions'   : 'PrescriptionController.create',
   'put /prescriptions/:id'    : 'PrescriptionController.update',
   'delete /prescriptions/:id'  :'PrescriptionController.delete',
+
+  /*
+   * Symptom routes
+   */
+  'get /symptoms/patient/:id'   : 'SymptomController.findAllByPatientId',
+  'put /symptoms/:id'    : 'SymptomController.update',
 };

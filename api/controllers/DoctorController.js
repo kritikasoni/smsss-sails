@@ -36,7 +36,7 @@ module.exports = {
   update: function (req, res) {
     Staff
       .update({id:req.params.id}, req.body, (err, updated) => {
-        if(err) return res.json(err);
+        if(err) return res.badRequest(err);
         return res.ok(updated);
     });
   },

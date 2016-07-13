@@ -37,7 +37,7 @@ module.exports = {
     Staff
       .update({id:req.params.id}, req.body, (err, updated) => {
         if(err) return res.badRequest(err);
-        return res.badRequest(updated);
+        return res.ok(updated);
       });
   },
   delete: function (req,res){
