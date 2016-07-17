@@ -74,24 +74,35 @@ module.exports.routes = {
   /*
    * MedicinePrescription routes
    */
-  'get /medicinePrescription'   : 'MedicinePrescriptionController.findAll',
-  'get /medicinePrescription/:id' : 'MedicinePrescriptionController.findById',
-  'post /medicinePrescription'   : 'MedicinePrescriptionController.create',
-  'put /medicinePrescription/:id'    : 'MedicinePrescriptionController.update',
-  'delete /medicinePrescription/:id'  :'MedicinePrescriptionController.delete',
+  'get /medicinePrescriptions'   : 'MedicinePrescriptionController.findAll',
+  'get /medicinePrescriptions/:id' : 'MedicinePrescriptionController.findById',
+  'get /medicinePrescriptions/prescription/:id' : 'MedicinePrescriptionController.findAllByPrescriptionId',
+  'post /medicinePrescriptions'   : 'MedicinePrescriptionController.create',
+  'put /medicinePrescriptions/:id'    : 'MedicinePrescriptionController.update',
+  'delete /medicinePrescriptions/:id'  :'MedicinePrescriptionController.delete',
 
   /*
    * Prescription routes
    */
+  'get /prescriptions/patient/:id'   : 'PrescriptionController.findAllByPatientId',
   'get /prescriptions'   : 'PrescriptionController.findAll',
   'get /prescriptions/:id' : 'PrescriptionController.findById',
   'post /prescriptions'   : 'PrescriptionController.create',
   'put /prescriptions/:id'    : 'PrescriptionController.update',
   'delete /prescriptions/:id'  :'PrescriptionController.delete',
 
+
   /*
    * Symptom routes
    */
   'get /symptoms/patient/:id'   : 'SymptomController.findAllByPatientId',
   'put /symptoms/:id'    : 'SymptomController.update',
+
+
+  /*
+   * Appointment routes
+   */
+  'get /appointments/patient/:id'   : 'AppointmentController.findAllByPatientId',
+  'put /appointments/:id'    : 'AppointmentController.update',
+
 };

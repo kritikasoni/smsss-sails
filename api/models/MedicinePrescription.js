@@ -21,7 +21,7 @@ module.exports = {
       maxLength: 64
 
     },
-    Remark: {
+    remark: {
       type: 'string',
       minLength: 3,
       maxLength: 256

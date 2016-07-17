@@ -11,15 +11,20 @@ module.exports = {
       .find()
       .populateAll()
       .then(medicinesPrescriptions => res.json(medicinesPrescriptions))
-      .catch(err => res.ok(err));
+      .catch(err => res.serverError(err));
   },
   findById: (req,res) => {
     MedicinePrescription
       .findOne({id:req.params.id}).populateAll()
-      .then(medicinePrescription => res.json(medicinesPrescriptions))
-      .catch(err => res.ok(err));
+      .then(medicinePrescription => res.json(medicinePrescription))
+      .catch(err => res.badRequest(err));
   },
-
+  findAllByPrescriptionId : (req, res) => {
+    MedicinePrescription
+      .find({prescription: req.params.id}).populateAll()
+      .then(medicinesPrescriptions => res.json(medicinesPrescriptions))
+      .catch(err => res.badRequest(err));
+  },
   create: function (req, res) {
     let medicinePrescription = req.body;
     MedicinePrescription
@@ -32,7 +37,7 @@ module.exports = {
   update: function (req, res) {
     medicinePrescription
       .update({id:req.params.id}, req.body, (err, updated) => {
-        if(err) return res.json(err);
+        if(err) return res.badRequest(err);
         return res.ok(updated);
       });
   },

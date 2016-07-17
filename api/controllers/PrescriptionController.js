@@ -16,10 +16,16 @@ module.exports = {
   findById: (req,res) => {
     Prescription
       .findOne({id:req.params.id}).populateAll()
-      .then(prescription => res.json(prescriptions))
+      .then(prescription => res.json(prescription))
       .catch(err => res.ok(err));
   },
-
+  findAllByPatientId :(req, res) => {
+    Prescription
+      .find({ patient: req.params.id })
+      .populateAll()
+      .then(prescriptions => res.json(prescriptions))
+      .catch(err => res.ok(err));
+  },
   create: function (req, res) {
     let prescription = req.body;
     Staff
