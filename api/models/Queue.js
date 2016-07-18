@@ -8,13 +8,10 @@
 module.exports = {
   tableName: 'queues',
   attributes: {
-   
     time: {
       type: 'dateTime',
       required : true,
-   
     },
-
     patient:{
       model:'patient',
       required : true

@@ -105,4 +105,8 @@ module.exports.routes = {
   'get /appointments/patient/:id'   : 'AppointmentController.findAllByPatientId',
   'put /appointments/:id'    : 'AppointmentController.update',
 
+  /*
+   * Queue routes
+   */
+  'get /queues'   : 'QueueController.findAll',
 };

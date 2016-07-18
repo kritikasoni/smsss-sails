@@ -11,20 +11,20 @@ module.exports = {
       .find()
       .populateAll()
       .then(prescriptions => res.json(prescriptions))
-      .catch(err => res.ok(err));
+      .catch(err => res.serverError(err));
   },
   findById: (req,res) => {
     Prescription
       .findOne({id:req.params.id}).populateAll()
       .then(prescription => res.json(prescription))
-      .catch(err => res.ok(err));
+      .catch(err => res.badRequest(err));
   },
   findAllByPatientId :(req, res) => {
     Prescription
       .find({ patient: req.params.id })
       .populateAll()
       .then(prescriptions => res.json(prescriptions))
-      .catch(err => res.ok(err));
+      .catch(err => res.badRequest(err));
   },
   create: function (req, res) {
     let prescription = req.body;
