@@ -109,4 +109,11 @@ module.exports.routes = {
    * Queue routes
    */
   'get /queues'   : 'QueueController.findAll',
+
+  /*
+   * Authentication routes
+   *
+   */
+  'post /authentication'   : 'AuthenticationController.staffLogin',
+
 };

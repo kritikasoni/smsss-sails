@@ -60,7 +60,7 @@ module.exports = {
   },
   beforeCreate: function(staff, cb) {
     bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(staff.password, salt, function(err, hash) {
+      bcrypt.hash(staff.password, salt, null, function(err, hash) {
         if (err) {
           console.error(err);
           cb(err);

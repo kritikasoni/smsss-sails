@@ -7,11 +7,15 @@
 
 module.exports = {
   findAll: (req,res) => {
-    Staff
-      .find()
-      .populate('role',{where: { name:'nurse'} })
-      .then(nurses => res.json(nurses))
-      .catch(err => res.ok(err));
+    Role
+      .findOne({name:'nurse'})
+      .then(role => {
+        Staff
+          .find({role: role.id})
+          .populateAll()
+          .then(nurses => res.json(nurses))
+      })
+      .catch(err => res.serverError(err));
   },
   findById: (req,res) => {
     Staff
