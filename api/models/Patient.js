@@ -7,13 +7,61 @@
 
 module.exports = {
 
+  tableName: 'patients',
   attributes: {
-    name:{
-      type:'string'
+    firstName: {
+      type: 'string',
+      required : true ,
+      minLength: 3,
+      maxLength: 64
     },
-    grade:{
-      type:'float'
-    }
+    lastName: {
+      type: 'string',
+      required : true,
+      minLength: 3,
+      maxLength: 64
+    },
+    email:{
+      type:'string',
+      unique:true,
+      required : true,
+      email: true
+      //เพิ่ม password ไหม
+    },
+    idCardNo:{
+      type:'string',
+      required : true,
+
+      minLength: 13,
+      maxLength: 13
+    },
+    dob:{
+      type:'date',
+      required : true,
+      datetime:true,
+
+    },
+    weight:{
+      type:'float',
+      required : true,
+
+      min: 1,
+      max: 500
+    },
+    height:{
+      type:'float',
+      required : true,
+      finite:true,
+      min: 1,
+      max: 300
+    },
+    phone:{
+      type:'string',
+      required : true,
+
+      minLength: 9,
+      maxLength: 10
+    },
   }
 };
 

@@ -34,7 +34,7 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +45,75 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+  'post /staffs' : 'StaffController.create',
+  /*
+  *  Doctor routes
+  */
+  'get /doctors'   : 'DoctorController.findAll',
+  'get /doctors/:id' : 'DoctorController.findById',
+  'post /doctors'   : 'DoctorController.create',
+  'put /doctors/:id'    : 'DoctorController.update',
+  'delete /doctors/:id'  :'DoctorController.delete',
+  /*
+  * Nurse routes
+  */
+  'get /nurses'   : 'NurseController.findAll',
+  'get /nurses/:id' : 'NurseController.findById',
+  'post /nurses'   : 'NurseController.create',
+  'put /nurses/:id'    : 'NurseController.update',
+  'delete /nurses/:id'  :'NurseController.delete',
+  /*
+   * Medicine routes
+   */
+  'get /medicines'   : 'MedicineController.findAll',
+  'get /medicines/:id' : 'MedicineController.findById',
+  'post /medicines'   : 'MedicineController.create',
+  'put /medicines/:id'    : 'MedicineController.update',
+  'delete /medicines/:id'  :'MedicineController.delete',
+
+  /*
+   * MedicinePrescription routes
+   */
+  'get /medicinePrescriptions'   : 'MedicinePrescriptionController.findAll',
+  'get /medicinePrescriptions/:id' : 'MedicinePrescriptionController.findById',
+  'get /medicinePrescriptions/prescription/:id' : 'MedicinePrescriptionController.findAllByPrescriptionId',
+  'post /medicinePrescriptions'   : 'MedicinePrescriptionController.create',
+  'put /medicinePrescriptions/:id'    : 'MedicinePrescriptionController.update',
+  'delete /medicinePrescriptions/:id'  :'MedicinePrescriptionController.delete',
+
+  /*
+   * Prescription routes
+   */
+  'get /prescriptions/patient/:id'   : 'PrescriptionController.findAllByPatientId',
+  'get /prescriptions'   : 'PrescriptionController.findAll',
+  'get /prescriptions/:id' : 'PrescriptionController.findById',
+  'post /prescriptions'   : 'PrescriptionController.create',
+  'put /prescriptions/:id'    : 'PrescriptionController.update',
+  'delete /prescriptions/:id'  :'PrescriptionController.delete',
+
+
+  /*
+   * Symptom routes
+   */
+  'get /symptoms/patient/:id'   : 'SymptomController.findAllByPatientId',
+  'put /symptoms/:id'    : 'SymptomController.update',
+
+
+  /*
+   * Appointment routes
+   */
+  'get /appointments/patient/:id'   : 'AppointmentController.findAllByPatientId',
+  'put /appointments/:id'    : 'AppointmentController.update',
+
+  /*
+   * Queue routes
+   */
+  'get /queues'   : 'QueueController.findAll',
+
+  /*
+   * Authentication routes
+   *
+   */
+  'post /authentication'   : 'AuthenticationController.staffLogin',
 
 };
