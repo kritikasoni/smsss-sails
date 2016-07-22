@@ -9,11 +9,21 @@ module.exports = {
   tableName: 'departments',
   autoCreatedAt: false,
   autoUpdatedAt: false,
+  autoPK:false,
   attributes: {
+    id: {
+      columnName: 'dep_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     name:{
+      columnName: 'dep_name',
       type:'string',
       required : true,
-      minLength: 2
+      minLength: 2,
+      maxLength: 128,
+      size: 52
     }
   }
 };
