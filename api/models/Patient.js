@@ -11,7 +11,7 @@ module.exports = {
   attributes: {
     firstName: {
       type: 'string',
-      required : true ,
+      required : true , //first name should be more than 3 characters and less than 64 characters
       minLength: 3,
       maxLength: 64
     },
@@ -24,14 +24,14 @@ module.exports = {
     email:{
       type:'string',
       unique:true,
-      required : true,
+      required : true,  //sorry, this email is already taken
       email: true
       //เพิ่ม password ไหม
     },
     idCardNo:{
       type:'string',
-      required : true,
-
+      required : true, //sorry this id is already taken
+      unique:true,
       minLength: 13,
       maxLength: 13
     },
@@ -42,7 +42,7 @@ module.exports = {
 
     },
     weight:{
-      type:'float',
+      type:'float',    //weight
       required : true,
 
       min: 1,
@@ -61,6 +61,11 @@ module.exports = {
 
       minLength: 9,
       maxLength: 10
+    },
+    bloodPressure: {
+      type: 'string',
+      minLength: 5,
+      maxLength: 7
     },
   }
 };

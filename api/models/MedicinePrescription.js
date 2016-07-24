@@ -12,13 +12,13 @@ module.exports = {
     dosage: {
       type: 'float',
       required : true ,
-      
+
     },
     timeToTake: {
       type: 'string',
       required : true ,
       minLength: 3,
-      maxLength: 64
+      maxLength: 256
 
     },
     remark: {
