@@ -1,14 +1,14 @@
 module.exports = [
-  { name: 'OPD1' },
-  { name: 'OPD2' },
-  { name: 'OPD3' },
-  { name: 'OPD4' },
-  { name: 'OPD5' },
-  { name: 'OPD6' },
-  { name: 'OPD7' },
-  { name: 'OPD8' },
-  { name: 'OPD9' },
-  { name: 'OPD10' },
-  { name: 'OPD11' },
-  { name: 'OPD12' }
+  { room_name: 'OPD1' },
+  { room_name: 'OPD2' },
+  { room_name: 'OPD3' },
+  { room_name: 'OPD4' },
+  { room_name: 'OPD5' },
+  { room_name: 'OPD6' },
+  { room_name: 'OPD7' },
+  { room_name: 'OPD8' },
+  { room_name: 'OPD9' },
+  { room_name: 'OPD10' },
+  { room_name: 'OPD11' },
+  { room_name: 'OPD12' }
 ];

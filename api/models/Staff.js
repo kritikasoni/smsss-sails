@@ -11,6 +11,7 @@ module.exports = {
     id: {
       columnName: 'staff_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
     },

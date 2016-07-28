@@ -13,6 +13,7 @@ module.exports = {
     id: {
       columnName: 'app_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
     },

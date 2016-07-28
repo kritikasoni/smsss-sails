@@ -15,7 +15,8 @@ module.exports = {
       columnName: 'dep_id',
       type: 'integer',
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name:{
       columnName: 'dep_name',

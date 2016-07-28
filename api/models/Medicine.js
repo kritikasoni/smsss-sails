@@ -11,8 +11,10 @@ module.exports = {
     id: {
       columnName: 'med_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
+      
     },
     scientificName: {
       columnName: 'med_scientificName',

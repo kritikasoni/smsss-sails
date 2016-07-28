@@ -14,6 +14,7 @@ module.exports = {
     id: {
       columnName: 'pos_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
     },
@@ -23,7 +24,7 @@ module.exports = {
       required : true,
       minLength: 3,
       maxLength: 64,
-      
+
     }
   }
 };

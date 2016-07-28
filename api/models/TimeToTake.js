@@ -1,33 +1,34 @@
-
 /**
- * Prescription.js
+ * Symptom.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-  tableName: 'prescriptions',
-  autoUpdatedAt: false,
-  attributes:
-  {
+  tableName: 'TimesToTake',
+  attributes: {
     id: {
-      columnName: 'pres_id',
+      columnName: 'timeToTake_id',
       type: 'integer',
       autoIncrement: true,
       unique: true,
       primaryKey: true
     },
-    patient:{
-      columnName: 'fk_pres_patient',
-      model:'patient',
-      required : true
+    period: {
+      columnName: 'ttt_period',
+      type: 'string',
+      required : true ,
+      minLength: 3,
+      maxLength: 64
     },
-    doctor:{
-      columnName: 'fk_pres_doctor',
-      model:'staff',
+
+    isBefore:{ //ใส่ยังไงให้เป็น boolean
+      columnName: 'ttt_isBefore',
+      
       required : true
     }
   }
 };
+
 

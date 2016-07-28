@@ -11,6 +11,7 @@ module.exports = {
     id: {
       columnName: 'symptom_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
     },

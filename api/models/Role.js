@@ -13,6 +13,7 @@ module.exports = {
     id: {
       columnName: 'role_id',
       type: 'integer',
+      autoIncrement: true,
       unique: true,
       primaryKey: true
     },
