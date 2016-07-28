@@ -10,20 +10,30 @@ module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
+    id: {
+      columnName: 'app_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     date: {
+      columnName: 'app_date',
       type: 'dateTime',
       required : true ,
 
     },
     room:{
+      columnName: 'fk_app_room',
       model:'room',
       required : true
     },
     patient:{
+      columnName: 'fk_app_patient',
       model:'patient',
       required : true
     },
     doctor:{
+      columnName: 'fk_app_doctor',
       model:'staff',
       required : true
     }

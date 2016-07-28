@@ -10,7 +10,14 @@ module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
+    id: {
+      columnName: 'room_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     name: {
+      columnName: 'room_name',
       type: 'string',
       required : true ,
       minLength : 2,

@@ -10,7 +10,14 @@ module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
+    id: {
+      columnName: 'role_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     name:{
+      columnName: 'role_name',
       type:'string',
       required : true
     }

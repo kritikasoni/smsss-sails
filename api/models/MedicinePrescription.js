@@ -9,12 +9,20 @@
 module.exports = {
   tableName: 'medicines_prescriptions',
   attributes: {
+    id: {
+      columnName: 'medPres_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     dosage: {
+      columnName: 'medPres_dosage',
       type: 'float',
       required : true ,
 
     },
     timeToTake: {
+      columnName: 'fk_medPres_timeToTake',
       type: 'string',
       required : true ,
       minLength: 3,
@@ -22,6 +30,7 @@ module.exports = {
 
     },
     remark: {
+      columnName: 'medPres_remark',
       type: 'string',
       minLength: 3,
       maxLength: 256
@@ -29,10 +38,12 @@ module.exports = {
 
     },
     medicine:{
+      columnName: 'fk_medPres_medicine',
       model:'medicine',
       required : true
     },
     prescription:{
+      columnName: 'fk_medPres_prescription',
       model:'prescription',
       required : true
     }

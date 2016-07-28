@@ -8,41 +8,54 @@ const bcrypt = require('bcrypt-nodejs');
 module.exports = {
   tableName: 'staffs',
   attributes: {
+    id: {
+      columnName: 'staff_id',
+      type: 'integer',
+      unique: true,
+      primaryKey: true
+    },
     firstName: {
+      columnName: 'staff_firstName',
       type: 'string',
       required : true ,
       minLength: 3,
       maxLength: 64
     },
     lastName: {
+      columnName: 'staff_lastName',
       type: 'string',
       required : true,
       minLength: 3,
       maxLength: 64
     },
     email:{
+      columnName: 'staff_email',
       type:'string',
       unique:true,
       required : true,
       email: true
     },
     password:{
+      columnName: 'staff_password',
       type:'string',
       required : true,
       minLength: 6,
       maxLength: 20
     },
     position:{
+      columnName: 'staff_position',
       type:'string',
       required : true,
       minLength: 3,
       maxLength: 64
     },
     role:{
+      columnName: 'staff_role',
       model:'role',
       required : true
     },
     department:{
+      columnName: 'staff_department',
       model:'department',
       required : true
     },
