@@ -1,5 +1,5 @@
 module.exports = [
-  { role_name: 'admin' },
-  { role_name: 'doctor' },
-  { role_name: 'nurse' }
+  { name: 'admin' },
+  { name: 'doctor' },
+  { name: 'nurse' }
 ];

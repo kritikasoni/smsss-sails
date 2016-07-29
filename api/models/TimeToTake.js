@@ -22,12 +22,7 @@ module.exports = {
       minLength: 3,
       maxLength: 64
     },
-
-    isBefore:{ //ใส่ยังไงให้เป็น boolean
-      columnName: 'ttt_isBefore',
-      
-      required : true
-    }
+    
   }
 };
 

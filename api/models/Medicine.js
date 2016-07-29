@@ -14,7 +14,7 @@ module.exports = {
       autoIncrement: true,
       unique: true,
       primaryKey: true
-      
+
     },
     scientificName: {
       columnName: 'med_scientificName',
