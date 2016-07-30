@@ -1,10 +1,10 @@
 var request = require('supertest');
 
-describe('DoctorController', function() {
+describe('NurseController', function() {
   describe('#find()', function() {
-    it('should return list of doctors', function (done) {
+    it('should return list of nurses', function (done) {
       request(sails.hooks.http.app)
-        .get('/doctors')
+        .get('/nurses')
         .expect(200)
         .end(function (err, res) {
           console.log(res.body);
@@ -18,20 +18,20 @@ describe('DoctorController', function() {
         });
     });
   });
-  describe('#create doctor()', function() {
+  describe('#create nurse()', function() {
     it('should success when data is correct', function (done) {
-      const doctor = {
-        firstName: 'Kritika',
-        lastName: 'Soni',
-        email: 'kittysn94@gmail.com',
-        password: 'docKritikaS',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'Sophie',
+        lastName: 'Turner',
+        email: 'SophieT@gmail.com',
+        password: 'nurSophieT',
+        position: '19',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(201)
         .end(function(err, res) {
@@ -43,20 +43,19 @@ describe('DoctorController', function() {
           else done(null, res);
         });
     });
-
     it('should fail when some information is not filled', function (done) {
-      const doctor = {
-        firstName: 'Kritika',
-        lastName: 'Soni',
-        email: 'kittysn94@gmail.com',
-        password: '',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'So',
+        lastName: 'Turner',
+        email: 'SophieT@gmail.com',
+        password: 'nurSophieT',
+        position: '',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(400)
         .end(function(err, res) {
@@ -69,18 +68,18 @@ describe('DoctorController', function() {
         });
     });
     it('should fail when first name format is incorrect', function (done) {
-      const doctor = {
-        firstName: 'Ks',
-        lastName: 'Soni',
-        email: 'kittysn94@gmail.com',
-        password: 'docKritikaS',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'So',
+        lastName: 'Turner',
+        email: 'SophieT@gmail.com',
+        password: 'nurSophieT',
+        position: '19',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(400)
         .end(function(err, res) {
@@ -93,18 +92,18 @@ describe('DoctorController', function() {
         });
     });
     it('should fail when last name format is incorrect', function (done) {
-      const doctor = {
-        firstName: 'Kritika',
-        lastName: 'S',
-        email: 'kittysn94@gmail.com',
-        password: 'docKritikaS',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'Sophie',
+        lastName: 'T',
+        email: 'SophieT@gmail.com',
+        password: 'nurSophieT',
+        position: '19',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(400)
         .end(function(err, res) {
@@ -117,18 +116,18 @@ describe('DoctorController', function() {
         });
     });
     it('should fail when email is already taken', function (done) {
-      const doctor = {
-        firstName: 'Kritika',
-        lastName: 'Soni',
-        email: 'kittysn94@hotmail.com',
-        password: 'docKritikaS',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'Sophie',
+        lastName: 'Turner',
+        email: 'SophieT@hotmail.com',
+        password: 'nurSophieT',
+        position: '19',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(400)
         .end(function(err, res) {
@@ -141,18 +140,18 @@ describe('DoctorController', function() {
         });
     });
     it('should fail when password format is incorrect', function (done) {
-      const doctor = {
-        firstName: 'Kritika',
-        lastName: 'Soni',
-        email: 'kittysn94@gmail.com',
-        password: 'docK',
-        position: 'Orthopeadics consultant',
-        role: '2',
+      const nurse = {
+        firstName: 'Sophie',
+        lastName: 'Turner',
+        email: 'SophieT@gmail.com',
+        password: 'nurS',
+        position: '19',
+        role: '3',
         department:'16'
       };
       request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
+        .post('/nurses')
+        .send(nurse)
         .type('json')
         .expect(400)
         .end(function(err, res) {
@@ -166,9 +165,9 @@ describe('DoctorController', function() {
     });
   });
 
-  // describe('#update doctor()', function() {
+  // describe('#update nurse()', function() {
   //   it('should success when data is correct', function (done) {
-  //     const doctor = {
+  //     const nurse = {
   //       firstName: 'Kritika',
   //       lastName: 'Soni',
   //       email: 'ks@hotmail.com',
@@ -178,8 +177,8 @@ describe('DoctorController', function() {
   //       department:'1'
   //     };
   //     request(sails.hooks.http.app)
-  //       .put('/doctors/'+doctor.id)
-  //       .send(doctor)
+  //       .put('/nurses/'+nurse.id)
+  //       .send(nurse)
   //       .type('json')
   //       .expect(201)
   //       .end(function(err, res) {
@@ -193,7 +192,7 @@ describe('DoctorController', function() {
   //   });
   //
   //   it('should fail when data is incorrect', function (done) {
-  //     const doctor = {
+  //     const nurse = {
   //       firstName: 'Kritika',
   //       lastName: 'Soni',
   //       email: 'dt@hotmail.com',
@@ -203,8 +202,8 @@ describe('DoctorController', function() {
   //       department:'1'
   //     };
   //     request(sails.hooks.http.app)
-  //       .post('/doctors')
-  //       .send(doctor)
+  //       .post('/nurses')
+  //       .send(nurse)
   //       .type('json')
   //       .expect(400)
   //       .end(function(err, res) {

@@ -20,7 +20,8 @@ module.exports = {
     name:{
       columnName: 'role_name',
       type:'string',
-      required : true
+      required : true,
+      unique: true,
     }
   }
 };

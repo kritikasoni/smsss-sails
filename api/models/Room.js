@@ -21,8 +21,9 @@ module.exports = {
       columnName: 'room_name',
       type: 'string',
       required : true ,
+      unique: true,
       minLength : 2,
-      maxLength : 64
+      maxLength : 32
     }
 
   }

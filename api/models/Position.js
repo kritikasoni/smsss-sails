@@ -22,6 +22,7 @@ module.exports = {
       columnName: 'pos_name',
       type:'string',
       required : true,
+      unique: true,
       minLength: 3,
       maxLength: 64,
 

@@ -22,8 +22,9 @@ module.exports = {
       columnName: 'dep_name',
       type:'string',
       required : true,
+      unique: true,
       minLength: 2,
-      maxLength: 128,
+      maxLength: 32,
       size: 52
     }
   }

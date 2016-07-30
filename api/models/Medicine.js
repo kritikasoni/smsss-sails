@@ -20,6 +20,7 @@ module.exports = {
       columnName: 'med_scientificName',
       type: 'string',
       required : true ,
+      unique: true,
       minLength: 3,
       maxLength: 64
     },
