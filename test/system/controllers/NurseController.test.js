@@ -119,7 +119,7 @@ describe('NurseController', function() {
       const nurse = {
         firstName: 'Sophie',
         lastName: 'Turner',
-        email: 'SophieT@hotmail.com',
+        email: 'SophieT@gmail.com',
         password: 'nurSophieT',
         position: '19',
         role: '3',

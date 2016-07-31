@@ -7,7 +7,6 @@ module.exports = [
   { name: 'General surgery' },
   { name: 'Genitourinary' },
   { name: 'Gynaecology' },
-  { name: 'Gastroenterology' },
   { name: 'Haematology' },
   { name: 'Microbiology' },
   { name: 'Nephrology' },

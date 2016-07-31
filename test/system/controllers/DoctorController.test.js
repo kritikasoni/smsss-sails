@@ -1,5 +1,5 @@
 var request = require('supertest');
-
+const assert = require('chai').assert;
 describe('DoctorController', function() {
   describe('#find()', function() {
     it('should return list of doctors', function (done) {
@@ -25,7 +25,7 @@ describe('DoctorController', function() {
         lastName: 'Soni',
         email: 'kittysn94@gmail.com',
         password: 'docKritikaS',
-        position: 'Orthopeadics consultant',
+        position: '14',
         role: '2',
         department:'16'
       };
@@ -120,7 +120,7 @@ describe('DoctorController', function() {
       const doctor = {
         firstName: 'Kritika',
         lastName: 'Soni',
-        email: 'kittysn94@hotmail.com',
+        email: 'kittysn94@gmail.com',
         password: 'docKritikaS',
         position: 'Orthopeadics consultant',
         role: '2',

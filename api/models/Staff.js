@@ -45,10 +45,8 @@ module.exports = {
     },
     position:{
       columnName: 'staff_position',
-      type:'string',
       required : true,
-      minLength: 3,
-      maxLength: 64
+      model: 'position'
     },
     role:{
       columnName: 'staff_role',

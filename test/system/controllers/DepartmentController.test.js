@@ -30,7 +30,7 @@ describe('DepartmentController', function() {
           const result = res.body.map(data => _.omit(data,'id'));
           assert.typeOf(res.body, 'array');
           assert.sameDeepMembers(result, departmentList);
-          assert.lengthOf(res.body, 17, 'department should have a length of 17');
+          assert.lengthOf(res.body, 16, 'department should have a length of 17');
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
@@ -62,18 +62,18 @@ describe('DepartmentController', function() {
         });
     });
 
-    
+
       it('should not create a department if department name is not filled', function (done) {
         const department = { name: '' };
         request(sails.hooks.http.app)
           .post('/departments')
           .send(department)
           .type('json')
-          .expect(201)
+          .expect(400)
           .end(function(err, res) {
-            const result = _.omit(res.body, 'id');
+            const result = res.body.Errors;
             assert.typeOf(result, 'object');
-            assert.deepEqual(result, department);
+            assert.isOk(result.name);
             if (err) {
               console.error('[!] ', err);
               console.error(res.body.invalidAttributes);

@@ -1,5 +1,5 @@
 var request = require('supertest');
-
+const assert = require('chai').assert;
 describe('RoomController', function() {
 
   describe('#find()', function() {
@@ -33,9 +33,11 @@ describe('RoomController', function() {
           }
           else done(null, res);
         });
+    });
+  });
       describe('#create()', function () {
         it('should create a room', function (done) {
-          const room = {name: 'OPD1'};
+          const room = {name: 'OPD13'};
           request(sails.hooks.http.app)
             .post('/rooms')
             .send(room)
@@ -110,6 +112,5 @@ describe('RoomController', function() {
         });
       });
     });
-  });
-});
+
 

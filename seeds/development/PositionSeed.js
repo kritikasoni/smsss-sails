@@ -8,7 +8,6 @@ module.exports = [
   { name: 'General surgery consultant' },
   { name: 'Genitourinary consultant' },
   { name: 'Gynaecology consultant' },
-  { name: 'Gastroenterology consultant' },
   { name: 'Haematology consultant' },
   { name: 'Microbiology consultant' },
   { name: 'Nephrology consultant' },
@@ -26,15 +25,5 @@ module.exports = [
   { name: 'Nurse Educator' },
   { name: 'Nurse Practitioner' },
   { name: 'Staff Nurse' }
-
-
-
-
-
-
-
-
-
-
 
 ];

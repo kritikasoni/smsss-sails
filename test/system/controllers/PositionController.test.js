@@ -1,5 +1,5 @@
 var request = require('supertest');
-
+const assert = require('chai').assert;
 describe('PositionController', function() {
 
   describe('#find()', function () {
@@ -48,86 +48,86 @@ describe('PositionController', function() {
           }
           else done(null, res);
         });
+    });
+  });
+  describe('#create()', function () {
+    it('should create a position', function (done) {
+      const position = {name: 'Anesthesia consultant'};
+      request(sails.hooks.http.app)
+        .post('/positions')
+        .send(position)
+        .type('json')
+        .expect(201)
+        .end(function (err, res) {
+          const result = _.omit(res.body, 'id');
+          assert.typeOf(result, 'object');
+          assert.deepEqual(result, position);
 
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
+        });
+    });
 
-      describe('#create()', function () {
-        it('should create a position', function (done) {
-          const position = {name: 'Anesthesia consultant'};
-          request(sails.hooks.http.app)
-            .post('/positions')
-            .send(position)
-            .type('json')
-            .expect(201)
-            .end(function (err, res) {
-              const result = _.omit(res.body, 'id');
-              assert.typeOf(result, 'object');
-              assert.deepEqual(result, position);
-              if (err) {
-                console.error('[!] ', err);
-                console.error(res.body.invalidAttributes);
-                done(err);
-              }
-              else done(null, res);
-            });
+    it('should not create a position if name length is less than 3', function (done) {
+      const position = {name: 'Ac'};
+      request(sails.hooks.http.app)
+        .post('/positions')
+        .send(position)
+        .type('json')
+        .expect(400)
+        .end(function (err, res) {
+          const result = res.body.Errors;
+          assert.isOk(result.name);
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
         });
-
-        it('should not create a position if name length is less than 3', function (done) {
-          const position = {name: 'Ac'};
-          request(sails.hooks.http.app)
-            .post('/positions')
-            .send(position)
-            .type('json')
-            .expect(400)
-            .end(function (err, res) {
-              const result = res.body.Errors;
-              assert.isOk(result.name);
-              if (err) {
-                console.error('[!] ', err);
-                console.error(res.body.invalidAttributes);
-                done(err);
-              }
-              else done(null, res);
-            });
+    });
+    it('should not create a position if name length is more than 64', function (done) {
+      const position = {name: 'Accidents and Emergency clinical nurse specialist and practitioner'};
+      request(sails.hooks.http.app)
+        .post('/positions')
+        .send(position)
+        .type('json')
+        .expect(400)
+        .end(function (err, res) {
+          const result = res.body.Errors;
+          assert.isOk(result.name);
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
         });
-        it('should not create a position if name length is more than 64', function (done) {
-          const position = {name: 'Accidents and Emergency clinical nurse specialist and practitioner'};
-          request(sails.hooks.http.app)
-            .post('/positions')
-            .send(position)
-            .type('json')
-            .expect(400)
-            .end(function (err, res) {
-              const result = res.body.Errors;
-              assert.isOk(result.name);
-              if (err) {
-                console.error('[!] ', err);
-                console.error(res.body.invalidAttributes);
-                done(err);
-              }
-              else done(null, res);
-            });
+    });
+    it('should not create a position if position name is not filled', function (done) {
+      const position = {name: ''};
+      request(sails.hooks.http.app)
+        .post('/positions')
+        .send(position)
+        .type('json')
+        .expect(400)
+        .end(function (err, res) {
+          const result = res.body.Errors;
+          assert.isOk(result.name);
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
         });
-        it('should not create a position if position name is not filled', function (done) {
-          const position = {name: ''};
-          request(sails.hooks.http.app)
-            .post('/positions')
-            .send(position)
-            .type('json')
-            .expect(400)
-            .end(function (err, res) {
-              const result = res.body.Errors;
-              assert.isOk(result.name);
-              if (err) {
-                console.error('[!] ', err);
-                console.error(res.body.invalidAttributes);
-                done(err);
-              }
-              else done(null, res);
-            });
-        });
-      });
     });
   });
 });
+  
 
 

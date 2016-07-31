@@ -1,5 +1,5 @@
 var request = require('supertest');
-
+const assert = require('chai').assert;
 describe('MedicineController', function() {
 
   describe('#find()', function() {
@@ -31,11 +31,12 @@ describe('MedicineController', function() {
         .post('/medicines')
         .send(medicine)
         .type('json')
-        .expect(201)
+        .expect(400)
         .end(function(err, res) {
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
+
             done(err);
           }
           else done(null, res);
@@ -75,7 +76,7 @@ describe('MedicineController', function() {
         .post('/medicines')
         .send(medicine)
         .type('json')
-        .expect(201)
+        .expect(400)
         .end(function(err, res) {
           if (err) {
             console.error('[!] ', err);
@@ -96,7 +97,7 @@ describe('MedicineController', function() {
         .post('/medicines')
         .send(medicine)
         .type('json')
-        .expect(201)
+        .expect(400)
         .end(function(err, res) {
           if (err) {
             console.error('[!] ', err);
@@ -118,9 +119,12 @@ describe('MedicineController', function() {
         .post('/medicines')
         .send(medicine)
         .type('json')
-        .expect(201)
+        .expect(400)
+
         .end(function(err, res) {
           if (err) {
+            const result = res.body.Errors;
+            assert.isOk(result.name);
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
             done(err);
@@ -139,9 +143,11 @@ describe('MedicineController', function() {
         .post('/medicines')
         .send(medicine)
         .type('json')
-        .expect(201)
+        .expect(400)
         .end(function(err, res) {
           if (err) {
+            const result = res.body.Errors;
+            assert.isOk(result.name);
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
             done(err);

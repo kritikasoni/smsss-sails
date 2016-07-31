@@ -1,5 +1,5 @@
 var request = require('supertest');
-
+const assert = require('chai').assert;
 describe('PatientController', function() {
   describe('#find()', function() {
     it('should return list of patients', function (done) {
@@ -65,6 +65,8 @@ describe('PatientController', function() {
         .type('json')
         .expect(400)
         .end(function(err, res) {
+          const result = res.body.Errors;
+          assert.isOk(result.lastName);
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
@@ -157,7 +159,7 @@ describe('PatientController', function() {
         lastName: 'Pingmuang',
         email: 'Chanwit.got7@hotmail.com',
         password: 'ilovegot7',
-        idCardNo: '3421111456782',
+        idCardNo: '3421100456782',
         dob: '1994-08-27T18:44:01.111Z',
         height: '48',
         weight:'175',
