@@ -14,6 +14,6 @@ module.exports = {
       .then(result => {
         return res.ok(result);
       })
-      .catch(err => res.badRequest(err));
+      .catch(err => res.badRequest({message:err.message}));
   }
 };

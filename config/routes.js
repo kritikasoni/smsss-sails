@@ -101,6 +101,10 @@ module.exports.routes = {
    * Queue routes
    */
   'get /queues'   : 'QueueController.findAll',
+  'get /queues/:id' : 'QueueController.findById',
+  'post /queues'   : 'QueueController.create',
+  'put /queues/:id'    : 'QueueController.update',
+  'delete /queues/:id'  :'QueueController.delete',
 
   /*
    * Authentication routes
