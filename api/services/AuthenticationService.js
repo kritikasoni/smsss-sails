@@ -1,42 +1,37 @@
-// AuthenticationService.js - in api/services
-const jwtSecret = sails.config.authentication.secretKey;
+var request = require('supertest');
+const mock = require('sails-mock-models');
+const assert = require('chai').assert;
+const jwtSecret = 'EJPenPee';
 const jwt = require('jsonwebtoken');
-module.exports = {
 
-  // patientLogin: function(email, password) {
-  //   //TODO: authenticate patient and staff login
-  // },
-  staffLogin: function(email, password) {
-    return new Promise((resolve, reject) => {
-      Staff
-        .findOne({email: email}).populateAll()
-        .then(staff => {
-          if(!staff) return reject(new Error('No user found'));
-          if(staff.verifyPassword(password)){
-            jwt.sign(
-              {
-                email: staff.email,
-                role: staff.role.name,
-                roleId: staff.role.id
-              },
-              jwtSecret,
-              {subject: staff.id + '', expiresIn: '24h'}, function (error, token) {
-                if(error) return reject(error);
-                return resolve({token: token, user: _.omit(staff,'password')});
-              }
-            );
-          }
-          else{
-            return reject(new Error("Credential(s) is invalid"));
-          }
+describe('AuthenticationService', function() {
+
+  describe('#staffLogin()', function() {
+    it('should success when data is correct', function (done) {
+      const doctor = {
+        firstName: 'Kritika',
+        lastName: 'Soni',
+        email: 'ks@hotmail.com',
+        password: '123456',
+        position: 'Orthopeadics consultant',
+        role: '1',
+        department: '1',
+        verifyPassword: (password) => true
+      };
+      mock.mockModel(Staff, 'findOne', doctor);
+      AuthenticationService
+        .staffLogin(doctor.email,doctor.password)
+        .then((result) => {
+          assert.notDeepEqual(doctor, result.user);
+          jwt.verify(result.token, jwtSecret, function (err, token) {
+            if (err) return done(err,result);
+            assert.isOk(token);
+            done(null, result);
+          });
+
         })
-        .catch(err => reject(err));
+        .catch(err => console.error(err));
     });
-  },
-  allowId: (req, res, id) => {
-    if(!req.token) return res.serverError({message: 'token attribute in request is not found'});
-    if(req.token.sub != parseInt(id) ) return res.forbidden({message: 'Forbidden'});
-    else return true;
-  }
+  });
+});
 
-};

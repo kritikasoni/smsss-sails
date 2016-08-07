@@ -4,8 +4,8 @@ describe('PositionController', function() {
 
   describe('#find()', function () {
     it('should return positions', function (done) {
-      const positionlist = [
-        //DOCTOR 16
+      const positionList = [
+        //DOCTOR 15
         {name: 'Accidents and Emergency consultant'},
         {name: 'Anesthesia consultant'},
         {name: 'Cardiology consultant'},
@@ -14,7 +14,6 @@ describe('PositionController', function() {
         {name: 'General surgery consultant'},
         {name: 'Genitourinary consultant'},
         {name: 'Gynaecology consultant'},
-        {name: 'Gastroenterology consultant'},
         {name: 'Haematology consultant'},
         {name: 'Microbiology consultant'},
         {name: 'Nephrology consultant'},
@@ -32,7 +31,7 @@ describe('PositionController', function() {
         {name: 'Nurse Educator'},
         {name: 'Nurse Practitioner'},
         {name: 'Staff Nurse'}
-      ]
+      ];
       request(sails.hooks.http.app)
         .get('/positions')
         .expect(200)
@@ -40,7 +39,7 @@ describe('PositionController', function() {
           const result = res.body.map(data => _.omit(data, 'id'));
           assert.typeOf(res.body, 'array');
           assert.sameDeepMembers(result, positionList);
-          assert.lengthOf(res.body, 25, 'position should have a length of 25');
+          assert.lengthOf(res.body, 24, 'position should have a length of 24');
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
@@ -52,7 +51,7 @@ describe('PositionController', function() {
   });
   describe('#create()', function () {
     it('should create a position', function (done) {
-      const position = {name: 'Anesthesia consultant'};
+      const position = {name: 'Pulmonology consultant'};
       request(sails.hooks.http.app)
         .post('/positions')
         .send(position)
@@ -127,7 +126,45 @@ describe('PositionController', function() {
         });
     });
   });
+  describe('#update()', function () {
+    it('should update if input is valid', function (done) {
+      const position = {id: 1, name: 'Neurology specialist'};
+      request(sails.hooks.http.app)
+        .put('/positions/' + position.id)
+        .send(position)
+        .type('json')
+        .expect(200)
+        .end(function (err, res) {
+          const result = res.body;
+          assert.deepEqual(result, position);
+
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
+        });
+    });
+  });
+  describe('#delete()', function () {
+    it('should update if input is valid', function (done) {
+      const position = {id: 1, name: 'Neurology specialist'};
+      request(sails.hooks.http.app)
+        .delete('/positions/' + position.id)
+        .expect(200)
+        .end(function (err, res) {
+          const result = res.body;
+          assert.isOk(result);
+          if (err) {
+            console.error('[!] ', err);
+            console.error(res.body.invalidAttributes);
+            done(err);
+          }
+          else done(null, res);
+        });
+    });
+  });
 });
-  
 
 
