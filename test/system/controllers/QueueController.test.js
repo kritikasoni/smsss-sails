@@ -9,7 +9,7 @@ describe('QueueController', function() {
       const queue = {
         patient: '1' ,
         room: '1',
-        time: '2016-06-06'
+        time: moment().year(2016).month(8).date(31).hour(13).minute(5).second(0).millisecond(0)
       };
       request(sails.hooks.http.app)
         .post('/queues')
@@ -17,10 +17,13 @@ describe('QueueController', function() {
         .type('json')
         .expect(201)
         .end(function(err, res) {
+          const result = _.omit(res.body,'id');
+          assert.equal(result.patient.id,queue.patient);
+          assert.equal(result.room.id,queue.room);
+          assert.equal(moment(result.time).toString(),queue.time.toString());
           if (err) {
             console.error('[!] ', err);
             console.error(res.body.invalidAttributes);
-
             done(err);
           }
           else done(null, res);

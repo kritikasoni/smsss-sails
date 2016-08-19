@@ -24,6 +24,8 @@ module.exports = [
   { name: 'Nurse Anesthetist' },
   { name: 'Nurse Educator' },
   { name: 'Nurse Practitioner' },
-  { name: 'Staff Nurse' }
+  { name: 'Staff Nurse' },
+  //ADMIN
+  { name: 'Admin' }
 
 ];

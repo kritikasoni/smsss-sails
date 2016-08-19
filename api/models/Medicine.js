@@ -27,7 +27,7 @@ module.exports = {
     informalName: {
       columnName: 'med_informalName',
       type: 'string',
-     // required : true,
+      // required : true,
       minLength: 3,
       maxLength: 64
     },
@@ -35,7 +35,7 @@ module.exports = {
       columnName: 'med_image',
       type:'string',
       required : true,
-
+      url: true
     },
     detail:{
       columnName: 'med_detail',
@@ -45,7 +45,28 @@ module.exports = {
       maxLength: 256
     },
 
+  },
+  validationMessages: {
+    scientificName: {
+      unique: 'Sorry, this medicine is already taken',
+      minLength: 'Scientific name should be from 3 to 64 characters',
+      maxLength: 'Scientific name should be from 3 to 64 characters',
+      required: 'Scientific name is required'
+    },
+    informalName: {
+      minLength: 'Informal name should be from 3 to 64 characters',
+      maxLength: 'Informal name should be from 3 to 64 characters',
+
+    },
+    image: {
+      url: "Image should be a valid url",
+      required: 'Image is required'
+    },
+    detail: {
+      minLength: 'Detail name should should be from 3 to 256 characters',
+      maxLength: 'Detail name should should be from 3 to 256 characters',
+      required: 'Detail name is required'
+    }
   }
 };
-
 

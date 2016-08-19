@@ -60,6 +60,20 @@ module.exports = {
         return res.ok({message:'success'})
       })
       .catch(err => res.badRequest(err));
+  },
+  searchByRoom: function(req,res){
+    Queue
+      .find({room:req.params.id}).populateAll()
+      .then(queues => {
+        if (req.isSocket) {
+          Queue.watch(req);
+          Queue.subscribe(req,queues);
+        }
+        if (req.wantsJSON) {
+          return res.ok(queues)
+        }
+      })
+      .catch(err => res.serverError(err));
   }
 };
 

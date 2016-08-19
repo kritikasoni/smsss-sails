@@ -13,6 +13,7 @@ module.exports = [
   { name: 'Neurology' },
   { name: 'Nutrition and dietetics' },
   { name: 'Orthopaedics' },
-  { name: 'Radiotherapy' }, 
-  { name: 'Urology' }
+  { name: 'Radiotherapy' },
+  { name: 'Urology' },
+  { name: 'Admin' }
 ];

@@ -76,6 +76,38 @@ module.exports = {
       });
     }
   },
+  validationMessages: {
+    firstName: {
+      minLength: 'First name must be longer than 3 characters',
+      maxLength: 'First name must be less than 64 characters',
+      required: 'First name is required',
+    },
+    lastName: {
+      minLength: 'Last name must be longer than 3 characters',
+      maxLength: 'Last name must be less than 64 characters',
+      required: 'Last name is required',
+    },
+    email: {
+      unique:'Email is already taken',
+      minLength: 'Email must be longer than 3 characters',
+      maxLength: 'Email must be less than 64 characters',
+      required: 'Email is required',
+    },
+    password: {
+      minLength: 'Password must be longer than 6 characters',
+      maxLength: 'Password must be less than 20 characters',
+      required: 'Password is required',
+    },
+    position: {
+      required: 'Position is required',
+    },
+    role: {
+      required: 'Role is required',
+    },
+    department: {
+      required: 'Department is required',
+    },
+  },
   beforeCreate: function(staff, cb) {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(staff.password, salt, null, function(err, hash) {

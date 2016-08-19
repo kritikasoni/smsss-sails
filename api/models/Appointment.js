@@ -18,7 +18,7 @@ module.exports = {
       primaryKey: true
     },
     date: {
-      columnName: 'app_date',
+      columnName: 'app_dateTime',
       type: 'dateTime',
       required : true ,
 
@@ -38,6 +38,20 @@ module.exports = {
       model:'staff',
       required : true
     }
+  },
+  validationMessages: {
+    date: {
+      required: 'Date is required',
+    },
+    room: {
+      required: 'Room is required',
+    },
+    patient: {
+      required: 'Patient is required',
+    },
+    doctor: {
+      required: 'Doctor is required',
+    },
   }
 };
 

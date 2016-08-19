@@ -6,10 +6,10 @@
  */
 
 module.exports = {
-  tableName: 'TimesToTake',
+  tableName: 'TIME_TO_TAKE',
   attributes: {
     id: {
-      columnName: 'timeToTake_id',
+      columnName: 'ttt_id',
       type: 'integer',
       autoIncrement: true,
       unique: true,
@@ -23,7 +23,7 @@ module.exports = {
       minLength: 3,
       maxLength: 64
     },
-    
+
   }
 };
 

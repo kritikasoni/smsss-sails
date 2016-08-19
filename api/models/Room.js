@@ -20,11 +20,19 @@ module.exports = {
     name: {
       columnName: 'room_name',
       type: 'string',
-      required : true ,
+      required: true,
       unique: true,
-      minLength : 2,
-      maxLength : 32
+      minLength: 2,
+      maxLength: 32
     }
 
+  },
+  validationMessages: {
+    name: {
+      unique: 'Sorry,this room is already taken',
+      minLength: 'Name should be from 2 to 32 characters',
+      maxLength: 'Name should be from 2 to 32 characters',
+      required: 'Name is required'
+    },
   }
 };

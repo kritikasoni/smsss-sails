@@ -1,7 +1,8 @@
+
 var request = require('supertest');
 const assert = require('chai').assert;
 describe('PositionController', function() {
-
+let positionId;
   describe('#find()', function () {
     it('should return positions', function (done) {
       const positionList = [
@@ -58,6 +59,7 @@ describe('PositionController', function() {
         .type('json')
         .expect(201)
         .end(function (err, res) {
+          positionId = res.body.id;
           const result = _.omit(res.body, 'id');
           assert.typeOf(result, 'object');
           assert.deepEqual(result, position);
@@ -128,7 +130,7 @@ describe('PositionController', function() {
   });
   describe('#update()', function () {
     it('should update if input is valid', function (done) {
-      const position = {id: 1, name: 'Neurology specialist'};
+      const position = {id: positionId, name: 'Neurology specialist'};
       request(sails.hooks.http.app)
         .put('/positions/' + position.id)
         .send(position)
@@ -148,10 +150,10 @@ describe('PositionController', function() {
     });
   });
   describe('#delete()', function () {
-    it('should update if input is valid', function (done) {
-      const position = {id: 1, name: 'Neurology specialist'};
+    it('should delete if input is valid', function (done) {
+      const positionId = 1;
       request(sails.hooks.http.app)
-        .delete('/positions/' + position.id)
+        .delete('/positions/' + positionId)
         .expect(200)
         .end(function (err, res) {
           const result = res.body;

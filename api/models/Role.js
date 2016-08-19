@@ -22,6 +22,7 @@ module.exports = {
       type:'string',
       required : true,
       unique: true,
+      size: '16'
     }
   }
 };

@@ -26,8 +26,6 @@ module.exports = {
       columnName: 'fk_medPres_timeToTake',
       type: 'string',
       required : true ,
-      minLength: 3,
-      maxLength: 256
 
     },
     remark: {
@@ -48,6 +46,24 @@ module.exports = {
       model:'prescription',
       required : true
     }
+  },
+  validationMessages: {
+    dosage: {
+      required: 'Dosage is required'
+    },
+    timeToTake: {
+        required: 'Time to take is required'
+      },
+    remark: {
+      minLength: 'Remark should be from 3 to 256 characters',
+      maxLength: 'Remark should be from 3 to 256 characters'
+    },
+    medicine: {
+      required: 'Medicine name is required'
+    },
+    prescription: {
+      required: 'Prescription is required'
+    },
   }
 };
 

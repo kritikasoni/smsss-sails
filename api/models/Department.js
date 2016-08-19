@@ -27,6 +27,13 @@ module.exports = {
       maxLength: 32,
       size: 52
     }
+  },
+  validationMessages: {
+    name: {
+      unique: 'Sorry, this department is already taken',
+      minLength: 'Department should should be from 2 to 32 characters',
+      maxLength: 'Department should should be from 2 to 32 characters',
+      required: 'Department name is required'
+    }
   }
 };
-

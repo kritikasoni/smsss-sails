@@ -27,6 +27,14 @@ module.exports = {
       maxLength: 64,
 
     }
+  },
+  validationMessages: {
+    name: {
+      unique:'Sorry,this position is already taken',
+      minLength: 'Position should be from 3 to 64 characters',
+      maxLength: 'Position should be from 3 to 64 characters',
+      required: 'Position is required'
+    },
   }
 };
 

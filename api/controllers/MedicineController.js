@@ -6,21 +6,22 @@
  */
 
 module.exports = {
-  searchByScientificName: (req, res) => {
+  searchByName: (req, res) => {
+    const scientificName = req.param('scientificName');
+    const informalName = req.param('informalName');
     Medicine.find({
-      scientificName: {
-        'contains': req.params.keyword
-      }
-    }).then(medicines => {
-      return res.ok(medicines);
-    })
-      .catch(err => res.badRequest(err));
-  },
-  searchByInformalName: (req, res) => {
-    Medicine.find({
-      informalName: {
-        'contains': req.params.keyword
-      }
+      or: [
+        {
+          scientificName: {
+            'contains': scientificName
+          }
+        },
+        {
+          informalName: {
+            'contains': informalName
+          }
+        }
+      ]
     }).then(medicines => {
       return res.ok(medicines);
     })

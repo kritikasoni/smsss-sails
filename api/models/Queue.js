@@ -30,6 +30,18 @@ module.exports = {
       model:'room',
       required : true
     }
+  },
+  validationMessages: {
+    time: {
+      required: 'Time is required'
+    },
+    patient: {
+      required: 'Patient is required'
+    },
+    room: {
+      required: 'Room is required'
+    }
+    
   }
 };
 

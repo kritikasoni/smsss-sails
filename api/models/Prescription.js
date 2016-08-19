@@ -28,6 +28,14 @@ module.exports = {
       model:'staff',
       required : true
     }
+  },
+  validationMessages: {
+    patient: {
+      required: 'Patient is required'
+    },
+      doctor: {
+        required: 'Doctor is required'
+      }
   }
 };
 

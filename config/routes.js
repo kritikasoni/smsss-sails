@@ -105,6 +105,7 @@ module.exports.routes = {
   'post /queues'   : 'QueueController.create',
   'put /queues/:id'    : 'QueueController.update',
   'delete /queues/:id'  :'QueueController.delete',
+  'get /queues/searchByRoom/:id' : 'QueueController.searchByRoom',
 
   /*
    * Authentication routes
@@ -120,6 +121,10 @@ module.exports.routes = {
   /*
    * MedicineController
    */
-  'get /medicines/search/scientificName/:keyword' : 'MedicineController.searchByScientificName',
-  'get /medicines/search/informalName/:keyword' : 'MedicineController.searchByInformalName',
+  'get /medicines/search' : 'MedicineController.searchByName',
+
+  /**
+   *  ImageController
+   */
+  'post /medicines/image/upload' : 'ImageController.uploadMedicineImage'
 };

@@ -28,6 +28,17 @@ module.exports = {
       model:'patient',
       required : true
     }
+  },
+
+  validationMessages: {
+    detail: {
+      minLength: 'Detail should be from 3 to 512 characters',
+      maxLength: 'Detail should be from 3 to 512 characters',
+      required: 'Detail is required',
+    },
+    patient: {
+      required: 'Patient is required',
+    },
   }
 };
 
