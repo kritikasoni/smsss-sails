@@ -42,7 +42,7 @@ module.exports = {
         }
         // If no files were uploaded, respond with an error.
         if (uploadedFiles.length === 0){
-          return res.badRequest('No file was uploaded');
+          return res.badRequest({ Errors: { image: 'No file was uploaded'} });
         }
         const fileDirectory = uploadedFiles[0].fd.split(path.sep);
         const imageUrl = `${sails.getBaseURL()}/${fileDirectory[fileDirectory.length - 3]}/${fileDirectory[fileDirectory.length - 2]}/${fileDirectory[fileDirectory.length - 1]}`;
