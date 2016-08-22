@@ -8,6 +8,7 @@ module.exports = { //auto extend มาจาก sails ซึ่งมีcrud �
   findAllByPatientId :(req, res) => {
     Appointment
       .find({ patient: req.params.id })
+      .populateAll()
       .then(appointments => res.json(appointments))
       .catch(err => res.ok(err));
   },

@@ -122,6 +122,7 @@ module.exports.routes = {
    * MedicineController
    */
   'get /medicines/search' : 'MedicineController.searchByName',
+  'delete /medicines/:id' : 'MedicineController.delete',
 
   /**
    *  ImageController
