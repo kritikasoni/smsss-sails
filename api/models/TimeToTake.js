@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  tableName: 'TIME_TO_TAKE',
+  tableName: 'time_to_take',
   attributes: {
     id: {
       columnName: 'ttt_id',

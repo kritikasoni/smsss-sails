@@ -124,8 +124,13 @@ module.exports.routes = {
   'get /medicines/search' : 'MedicineController.searchByName',
   'delete /medicines/:id' : 'MedicineController.delete',
 
-  /**
+  /*
    *  ImageController
    */
-  'post /medicines/image/upload' : 'ImageController.uploadMedicineImage'
+  'post /medicines/image/upload' : 'ImageController.uploadMedicineImage',
+
+  /*
+   *  TimeToTakeController
+   */
+  'post /timeToTakes' : 'TimeToTakeController.findAll'
 };
