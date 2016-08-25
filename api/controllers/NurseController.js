@@ -38,10 +38,18 @@ module.exports = {
   },
 
   update: function (req, res) {
+    const newPassword = req.body.password || undefined;
+    let newUser= req.body;
+    if(newPassword) {
+      newUser.newPassword = newPassword;
+    }
     Staff
-      .update({id:req.params.id}, req.body, (err, updated) => {
+      .update({id:req.params.id}, newUser, (err, updated) => {
         if(err) return res.badRequest(err);
-        return res.ok(updated);
+        Staff
+          .findOne({id:req.params.id})
+          .populateAll()
+          .then(nurse => res.ok(nurse)).catch(error => res.badRequest(error));
       });
   },
   delete: function (req,res){

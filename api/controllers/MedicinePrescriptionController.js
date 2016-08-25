@@ -35,14 +35,14 @@ module.exports = {
   },
 
   update: function (req, res) {
-    medicinePrescription
+    MedicinePrescription
       .update({id:req.params.id}, req.body, (err, updated) => {
         if(err) return res.badRequest(err);
         return res.ok(updated);
       });
   },
   delete: function (req,res){
-    medicinePrescription.destroy({id:req.params.id})
+    MedicinePrescription.destroy({id:req.params.id})
       .then(() => res.json({message:'success'}))
       .catch(err => res.badRequest(err));
   }

@@ -125,12 +125,14 @@ module.exports = {
     if(staff.newPassword){
       bcrypt.genSalt(10, function(err, salt) {
         if (err) return cb(err);
-        bcrypt.hash(staff.newPassword, salt, function(err, hash) {
-          if(err) return cb(err);
-
-          delete staff.newPassword;
-          staff.password = hash;
-          return cb();
+        bcrypt.hash(staff.newPassword, salt, null, function(err, hash) {
+          if (err) {
+            console.error(err);
+            cb(err);
+          } else {
+            staff.password = hash;
+            cb();
+          }
         });
       });
     }

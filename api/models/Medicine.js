@@ -63,9 +63,9 @@ module.exports = {
       required: 'Image is required'
     },
     detail: {
-      minLength: 'Detail name should should be from 3 to 256 characters',
-      maxLength: 'Detail name should should be from 3 to 256 characters',
-      required: 'Detail name is required'
+      minLength: 'Detail should should be from 3 to 256 characters',
+      maxLength: 'Detail  should should be from 3 to 256 characters',
+      required: 'Detail is required'
     }
   }
 };
