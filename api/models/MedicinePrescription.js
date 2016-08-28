@@ -18,7 +18,7 @@ module.exports = {
     },
     dosage: {
       columnName: 'medPres_dosage',
-      type: 'float',
+      type: 'integer',
       required : true ,
 
     },
@@ -52,8 +52,8 @@ module.exports = {
       required: 'Dosage is required'
     },
     timeToTake: {
-        required: 'Time to take is required'
-      },
+      required: 'Time to take is required'
+    },
     remark: {
       minLength: 'Remark should be from 3 to 256 characters',
       maxLength: 'Remark should be from 3 to 256 characters'
@@ -66,5 +66,4 @@ module.exports = {
     },
   }
 };
-
 
