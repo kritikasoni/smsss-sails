@@ -80,7 +80,8 @@ module.exports = {
       columnName: 'patient_bloodPressure',
       type: 'string',
       minLength: 5,
-      maxLength: 7
+      maxLength: 7,
+      regex: '/^\d{2,3}\/\d{2,3}$/'
     },
   },
   validationMessages: {
@@ -125,8 +126,8 @@ module.exports = {
     bloodPressure: {
       minLength: 'Blood pressure should be from 5 to 7 characters for example  120/80',
       maxLength: 'Blood pressure should be from 5 to 7 characters for example  120/80',
-      required: 'Blood pressure is required'
+      required: 'Blood pressure is required',
+      regex: 'Blood pressure must be in format of nnn/nnn. Eg. 120/111'
     },
   }
 };
-
