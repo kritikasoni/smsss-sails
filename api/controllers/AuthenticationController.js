@@ -17,5 +17,17 @@ module.exports = {
       .catch(err => {
         return res.badRequest({message:err.message});
       });
+  },
+  patientLogin: (req,res) => {
+    if(!req.body.email || !req.body.password)
+      return res.badRequest({message:'email and password are required'});
+    AuthenticationService
+      .patientLogin(req.body.email, req.body.password)
+      .then(result => {
+        return res.ok(result);
+      })
+      .catch(err => {
+        return res.badRequest({message:err.message});
+      });
   }
 };

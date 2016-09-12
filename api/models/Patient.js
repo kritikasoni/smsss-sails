@@ -4,7 +4,7 @@
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
-
+const bcrypt = require('bcrypt-nodejs');
 module.exports = {
 
   tableName: 'patients',
@@ -36,7 +36,6 @@ module.exports = {
       unique:true,
       required : true,  //sorry, this email is already taken
       email: true
-      //เพิ่ม password ไหม
     },
     idCardNo:{
       columnName: 'patient_idCardNo',
@@ -83,6 +82,30 @@ module.exports = {
       maxLength: 7,
       regex: '/^\d{2,3}\/\d{2,3}$/'
     },
+    password:{
+      columnName: 'patient_password',
+      type:'string',
+      required : true,
+      minLength: 6,
+      maxLength: 20
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
+    },
+
+    verifyPassword: function (password) {
+      return bcrypt.compareSync(password, this.password);
+    },
+
+    changePassword: function(newPassword, cb){
+      this.newPassword = newPassword;
+      this.save(function(err, u) {
+        return cb(err,u);
+      });
+    }
   },
   validationMessages: {
     firstName: {
@@ -129,5 +152,42 @@ module.exports = {
       required: 'Blood pressure is required',
       regex: 'Blood pressure must be in format of nnn/nnn. Eg. 120/111'
     },
+    password: {
+      minLength: 'Password must be longer than 6 characters',
+      maxLength: 'Password must be less than 20 characters',
+      required: 'Password is required',
+    },
+  },
+  beforeCreate: function(patient, cb) {
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(patient.password, salt, null, function(err, hash) {
+        if (err) {
+          console.error(err);
+          cb(err);
+        } else {
+          patient.password = hash;
+          cb();
+        }
+      });
+    });
+  },
+  beforeUpdate: function (patient, cb) {
+    if(patient.newPassword){
+      bcrypt.genSalt(10, function(err, salt) {
+        if (err) return cb(err);
+        bcrypt.hash(patient.newPassword, salt, null, function(err, hash) {
+          if (err) {
+            console.error(err);
+            cb(err);
+          } else {
+            patient.password = hash;
+            cb();
+          }
+        });
+      });
+    }
+    else {
+      return cb();
+    }
   }
 };

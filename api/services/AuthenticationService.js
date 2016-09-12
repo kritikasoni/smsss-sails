@@ -3,9 +3,33 @@ const jwtSecret = sails.config.authentication.secretKey;
 const jwt = require('jsonwebtoken');
 module.exports = {
 
-  // patientLogin: function(email, password) {
-  //   //TODO: authenticate patient and staff login
-  // },
+  patientLogin: function(email, password) {
+    return new Promise((resolve, reject) => {
+      Patient
+        .findOne({email: email}).populateAll()
+        .then(patient => {
+          if(!patient) return reject(new Error('No user found'));
+          if(patient.verifyPassword(password)){
+            jwt.sign(
+              {
+                email: patient.email,
+                role: 'patient',
+                roleId: null
+              },
+              jwtSecret,
+              {subject: patient.id + '', expiresIn: '24h'}, function (error, token) {
+                if(error) return reject(error);
+                return resolve({token: token, user: _.omit(patient,'password')});
+              }
+            );
+          }
+          else{
+            return reject(new Error("Credential(s) is invalid"));
+          }
+        })
+        .catch(err => reject(err));
+    });
+  },
   staffLogin: function(email, password) {
     return new Promise((resolve, reject) => {
       Staff

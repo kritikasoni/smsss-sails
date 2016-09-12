@@ -112,6 +112,7 @@ module.exports.routes = {
    *
    */
   'post /authentication'   : 'AuthenticationController.staffLogin',
+  'post /authentication/patients'   : 'AuthenticationController.patientLogin',
 
   /*
    * PatientController
