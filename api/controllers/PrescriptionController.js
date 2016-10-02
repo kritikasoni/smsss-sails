@@ -55,9 +55,13 @@ module.exports = {
   },
   delete: function (req,res){
     Prescription.destroy({id:req.params.id})
-      .then(() => res.json({message:'success'}))
+      .then(() => {
+        return MedicinePrescription.destroy({prescription: req.params.id})
+      })
+      .then(() => {
+        return res.ok({message:'success'});
+      })
       .catch(err => res.badRequest(err));
   }
 };
-
 

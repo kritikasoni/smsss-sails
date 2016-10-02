@@ -1,11 +1,10 @@
 /**
- * RoleController
+ * RoomController
  *
- * @description :: Server-side logic for managing roles
+ * @description :: Server-side logic for managing users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 module.exports = {
-	
-};
 
+};

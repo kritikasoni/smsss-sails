@@ -8,43 +8,61 @@ const bcrypt = require('bcrypt-nodejs');
 module.exports = {
   tableName: 'staffs',
   attributes: {
+    id: {
+      columnName: 'staff_id',
+      type: 'integer',
+      autoIncrement: true,
+      unique: true,
+      primaryKey: true
+    },
     firstName: {
+      columnName: 'staff_firstName',
       type: 'string',
       required : true ,
       minLength: 3,
       maxLength: 64
     },
     lastName: {
+      columnName: 'staff_lastName',
       type: 'string',
       required : true,
       minLength: 3,
       maxLength: 64
     },
     email:{
+      columnName: 'staff_email',
       type:'string',
       unique:true,
       required : true,
       email: true
     },
     password:{
+      columnName: 'staff_password',
       type:'string',
       required : true,
       minLength: 6,
       maxLength: 20
     },
     position:{
-      type:'string',
+      columnName: 'staff_position',
       required : true,
-      minLength: 3,
-      maxLength: 64
+      model: 'position'
     },
     role:{
+      columnName: 'staff_role',
       model:'role',
       required : true
     },
     department:{
+      columnName: 'staff_department',
       model:'department',
       required : true
+    },
+
+    toJSON: function () {
+      var obj = this.toObject();
+      delete obj.password;
+      return obj;
     },
 
     verifyPassword: function (password) {
@@ -57,6 +75,38 @@ module.exports = {
         return cb(err,u);
       });
     }
+  },
+  validationMessages: {
+    firstName: {
+      minLength: 'First name must be longer than 3 characters',
+      maxLength: 'First name must be less than 64 characters',
+      required: 'First name is required',
+    },
+    lastName: {
+      minLength: 'Last name must be longer than 3 characters',
+      maxLength: 'Last name must be less than 64 characters',
+      required: 'Last name is required',
+    },
+    email: {
+      unique:'Email is already taken',
+      minLength: 'Email must be longer than 3 characters',
+      maxLength: 'Email must be less than 64 characters',
+      required: 'Email is required',
+    },
+    password: {
+      minLength: 'Password must be longer than 6 characters',
+      maxLength: 'Password must be less than 20 characters',
+      required: 'Password is required',
+    },
+    position: {
+      required: 'Position is required',
+    },
+    role: {
+      required: 'Role is required',
+    },
+    department: {
+      required: 'Department is required',
+    },
   },
   beforeCreate: function(staff, cb) {
     bcrypt.genSalt(10, function(err, salt) {
@@ -75,12 +125,14 @@ module.exports = {
     if(staff.newPassword){
       bcrypt.genSalt(10, function(err, salt) {
         if (err) return cb(err);
-        bcrypt.hash(staff.newPassword, salt, function(err, hash) {
-          if(err) return cb(err);
-
-          delete staff.newPassword;
-          staff.password = hash;
-          return cb();
+        bcrypt.hash(staff.newPassword, salt, null, function(err, hash) {
+          if (err) {
+            console.error(err);
+            cb(err);
+          } else {
+            staff.password = hash;
+            cb();
+          }
         });
       });
     }

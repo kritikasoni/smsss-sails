@@ -21,7 +21,7 @@ module.exports = {
   },
   findAllByPrescriptionId : (req, res) => {
     MedicinePrescription
-      .find({prescription: req.params.id}).populateAll()
+      .find({prescription: req.params.id})
       .then(medicinesPrescriptions => res.json(medicinesPrescriptions))
       .catch(err => res.badRequest(err));
   },
@@ -29,23 +29,22 @@ module.exports = {
     let medicinePrescription = req.body;
     MedicinePrescription
       .create(medicinePrescription)
-      .then(medicinePrescription => medicinePrescription.findOne({id:medicinePrescription.id}).populateAll())
+      .then(medicinePrescription => MedicinePrescription.findOne({id:medicinePrescription.id}).populateAll())
       .then(medicinePrescription => res.created(medicinePrescription))
       .catch(err => res.badRequest(err));
   },
 
   update: function (req, res) {
-    medicinePrescription
+    MedicinePrescription
       .update({id:req.params.id}, req.body, (err, updated) => {
         if(err) return res.badRequest(err);
         return res.ok(updated);
       });
   },
   delete: function (req,res){
-    medicinePrescription.destroy({id:req.params.id})
+    MedicinePrescription.destroy({id:req.params.id})
       .then(() => res.json({message:'success'}))
       .catch(err => res.badRequest(err));
   }
 };
-
 

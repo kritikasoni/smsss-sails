@@ -9,19 +9,27 @@
 module.exports = {
   tableName: 'medicines_prescriptions',
   attributes: {
+    id: {
+      columnName: 'medPres_id',
+      type: 'integer',
+      autoIncrement: true,
+      unique: true,
+      primaryKey: true
+    },
     dosage: {
-      type: 'float',
+      columnName: 'medPres_dosage',
+      type: 'integer',
       required : true ,
-      
+
     },
     timeToTake: {
+      columnName: 'fk_medPres_timeToTake',
       type: 'string',
       required : true ,
-      minLength: 3,
-      maxLength: 64
 
     },
     remark: {
+      columnName: 'medPres_remark',
       type: 'string',
       minLength: 3,
       maxLength: 256
@@ -29,14 +37,33 @@ module.exports = {
 
     },
     medicine:{
+      columnName: 'fk_medPres_medicine',
       model:'medicine',
       required : true
     },
     prescription:{
+      columnName: 'fk_medPres_prescription',
       model:'prescription',
       required : true
     }
+  },
+  validationMessages: {
+    dosage: {
+      required: 'Dosage is required'
+    },
+    timeToTake: {
+      required: 'Time to take is required'
+    },
+    remark: {
+      minLength: 'Remark should be from 3 to 256 characters',
+      maxLength: 'Remark should be from 3 to 256 characters'
+    },
+    medicine: {
+      required: 'Medicine name is required'
+    },
+    prescription: {
+      required: 'Prescription is required'
+    },
   }
 };
-
 

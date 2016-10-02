@@ -6,6 +6,14 @@
  */
 
 module.exports = {
-	
+  searchByIdCardNo: (req,res) => {
+    Patient.find({
+      idCardNo: {
+        'contains' : req.params.idCardNo
+      }
+    }).then(patients => {
+      return res.ok(patients);
+    })
+      .catch(err => res.badRequest(err));
+  }
 };
-

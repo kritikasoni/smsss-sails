@@ -8,18 +8,40 @@
 module.exports = {
   tableName: 'queues',
   attributes: {
+    id: {
+      columnName: 'queue_id',
+      type: 'integer',
+      autoIncrement: true,
+      unique: true,
+      primaryKey: true
+    },
     time: {
+      columnName: 'fk_queue_time',
       type: 'dateTime',
       required : true,
     },
     patient:{
+      columnName: 'fk_queue_patient',
       model:'patient',
       required : true
     },
     room:{
+      columnName: 'fk_queue_room',
       model:'room',
       required : true
     }
+  },
+  validationMessages: {
+    time: {
+      required: 'Time is required'
+    },
+    patient: {
+      required: 'Patient is required'
+    },
+    room: {
+      required: 'Room is required'
+    }
+    
   }
 };
 

@@ -1,4 +1,8 @@
 var request = require('supertest');
+const mock = require('sails-mock-models');
+const assert = require('chai').assert;
+const jwtSecret = 'EJPenPee';
+const jwt = require('jsonwebtoken');
 
 describe('AuthenticationService', function() {
 
@@ -9,25 +13,25 @@ describe('AuthenticationService', function() {
         lastName: 'Soni',
         email: 'ks@hotmail.com',
         password: '123456',
-        position: 'Orthopedics consultant',
+        position: '1',
         role: '1',
-        department: '1'
+        department: '1',
+        verifyPassword: (password) => true
       };
-      request(sails.hooks.http.app)
-        .post('/doctors')
-        .send(doctor)
-        .type('json')
-        .expect(201)
-        .end(function (err, res) {
-          if (err) {
-            console.error('[!] ', err);
-            console.error(res.body.invalidAttributes);
-            done(err);
-          }
-          else done(null, res);
-        });
+      mock.mockModel(Staff, 'findOne', doctor);
+      AuthenticationService
+        .staffLogin(doctor.email,doctor.password)
+        .then((result) => {
+          assert.notDeepEqual(doctor, result.user);
+          jwt.verify(result.token, jwtSecret, function (err, token) {
+            if (err) return done(err,result);
+            assert.isOk(token);
+            done(null, result);
+          });
+
+        })
+        .catch(err => console.error(err));
     });
   });
 });
-
 

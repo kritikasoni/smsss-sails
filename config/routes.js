@@ -23,53 +23,45 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
   '/': {
     view: 'homepage'
   },
 
   /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
   'post /staffs' : 'StaffController.create',
   /*
-  *  Doctor routes
-  */
+   *  Doctor routes
+   */
   'get /doctors'   : 'DoctorController.findAll',
   'get /doctors/:id' : 'DoctorController.findById',
   'post /doctors'   : 'DoctorController.create',
   'put /doctors/:id'    : 'DoctorController.update',
   'delete /doctors/:id'  :'DoctorController.delete',
   /*
-  * Nurse routes
-  */
+   * Nurse routes
+   */
   'get /nurses'   : 'NurseController.findAll',
   'get /nurses/:id' : 'NurseController.findById',
   'post /nurses'   : 'NurseController.create',
   'put /nurses/:id'    : 'NurseController.update',
   'delete /nurses/:id'  :'NurseController.delete',
-  /*
-   * Medicine routes
-   */
-  'get /medicines'   : 'MedicineController.findAll',
-  'get /medicines/:id' : 'MedicineController.findById',
-  'post /medicines'   : 'MedicineController.create',
-  'put /medicines/:id'    : 'MedicineController.update',
-  'delete /medicines/:id'  :'MedicineController.delete',
 
   /*
    * MedicinePrescription routes
@@ -108,12 +100,42 @@ module.exports.routes = {
   /*
    * Queue routes
    */
+  'get /queues/currentUser' : 'QueueController.searchByCurrentPatient',
+  'get /queues/joinRoom/:id' : 'QueueController.joinRoom',
+  'get /queues/searchByRoom/:id' : 'QueueController.searchByRoom',
   'get /queues'   : 'QueueController.findAll',
+  'get /queues/:id' : 'QueueController.findById',
+  'post /queues'   : 'QueueController.create',
+  'put /queues/:id'    : 'QueueController.update',
+  'delete /queues/:id'  :'QueueController.delete',
+
+
 
   /*
    * Authentication routes
    *
    */
   'post /authentication'   : 'AuthenticationController.staffLogin',
+  'post /authentication/patients'   : 'AuthenticationController.patientLogin',
 
+  /*
+   * PatientController
+   */
+  'get /patients/search/idCardNo/:idCardNo' : 'PatientController.searchByIdCardNo',
+
+  /*
+   * MedicineController
+   */
+  'get /medicines/search' : 'MedicineController.searchByName',
+  'delete /medicines/:id' : 'MedicineController.delete',
+
+  /*
+   *  ImageController
+   */
+  'post /medicines/image/upload' : 'ImageController.uploadMedicineImage',
+
+  /*
+   *  TimeToTakeController
+   */
+  'post /timeToTakes' : 'TimeToTakeController.findAll'
 };

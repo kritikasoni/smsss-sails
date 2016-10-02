@@ -20,11 +20,15 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
+    "jsonwebtoken": "^7.1.6",
+    "moment": "^2.14.1",
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
     "sails-hook-autoreload": "^0.13.1",
     "sails-hook-seed": "^0.2.6",
+    "sails-hook-validation": "^0.4.6",
+    "sails-mock-models": "0.0.6",
     "sails-mysql": "^0.11.5"
   },
   "scripts": {
@@ -39,6 +43,7 @@
   "author": "anonymous node/sails user",
   "license": "",
   "devDependencies": {
+    "chai": "^3.5.0",
     "sails-memory": "^0.10.7",
     "supertest": "^1.2.0"
   }
