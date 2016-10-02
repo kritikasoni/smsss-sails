@@ -90,11 +90,11 @@ module.exports = {
   joinRoom: function(req, res) {
     const roomId = req.params.id;
     console.log('roomId',req.params.id);
-    sails.socket.join(req, `room:${roomId}`, function(err) {
+    sails.sockets.join(req, `room:${roomId}`, function(err) {
       if(err) {
         return res.serverError(err);
       }
-      sails.sockets.broadcast(`room:${roomId}`, 'test');
+      sails.sockets.broadcast(`room:${roomId}`, 'patient joined');
       return res.ok('success');
     });
 
