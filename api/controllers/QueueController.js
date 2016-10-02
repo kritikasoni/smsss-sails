@@ -75,29 +75,27 @@ module.exports = {
       })
       .catch(err => res.serverError(err));
   },
-  searchByCurrentPatient: function (req, res) {
+  joinCurrentRoom: function(req, res) {
     const patientId = req.token.sub;
+    if(!req.isSocket){
+      return res.json(401,{message: 'Request is not web socket!'})
+    }
     Queue
       .findOne({patient: patientId})
       .then(queue => {
         if(!queue){
           return res.json(404,{message: 'No queue found'});
         }
-        return res.ok(queue);
+        const roomId = queue.id;
+        sails.sockets.join(req, `room:${roomId}`, function(err) {
+          if(err) {
+            return res.serverError(err);
+          }
+          sails.sockets.broadcast(`room:${roomId}`, 'patient joined');
+          return res.ok('success');
+        });
       })
       .catch(err => res.serverError(err));
-  },
-  joinRoom: function(req, res) {
-    const roomId = req.params.id;
-    console.log('roomId',req.params.id);
-    sails.sockets.join(req, `room:${roomId}`, function(err) {
-      if(err) {
-        return res.serverError(err);
-      }
-      sails.sockets.broadcast(`room:${roomId}`, 'patient joined');
-      return res.ok('success');
-    });
-
   }
 };
 

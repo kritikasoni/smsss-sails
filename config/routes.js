@@ -96,8 +96,7 @@ module.exports.routes = {
   /*
    * Queue routes
    */
-  'get /queues/currentPatient' : 'QueueController.searchByCurrentPatient',
-  'get /queues/joinRoom/:id' : 'QueueController.joinRoom',
+  'get /queues/joinCurrentRoom' : 'QueueController.joinCurrentRoom',
   'get /queues/searchByRoom/:id' : 'QueueController.searchByRoom',
   'get /queues'   : 'QueueController.findAll',
   'get /queues/:id' : 'QueueController.findById',
