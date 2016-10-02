@@ -81,7 +81,7 @@ module.exports = {
       .findOne({patient: patientId})
       .then(queue => {
         if(!queue){
-          return res.notFound('No queue found');
+          return res.notFound({message: 'No queue found'});
         }
         return res.ok(queue);
       })
