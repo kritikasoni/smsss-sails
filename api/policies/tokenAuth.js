@@ -24,7 +24,7 @@ module.exports = function(req, res, next) {
           token = authorizationValue[1];
         }
       } else {
-        return res.badRequest({message: 'Format is Authorization: Bearer [token]'});
+        return res.json(401,{message: 'Format is Authorization: Bearer [token]'});
       }
     }
     else if (req.param('token')) {
@@ -36,7 +36,7 @@ module.exports = function(req, res, next) {
     }
 
     jwt.verify(token, jwtSecret, function (err, token) {
-      if (err) return res.badRequest({message: 'Invalid Token!'});
+      if (err) return res.json(401,{message: 'Invalid Token!'});
       req.token = token; // This is the decrypted token or the payload you provided
       console.info('user',token.email,' make a request');
       next();
