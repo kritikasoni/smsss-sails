@@ -74,6 +74,30 @@ module.exports = {
         }
       })
       .catch(err => res.serverError(err));
+  },
+  searchByCurrentPatient: function (req, res) {
+    const patientId = req.token.sub;
+    Queue
+      .findOne({patient: patientId})
+      .then(queue => {
+        if(!queue){
+          return res.notFound('No queue found');
+        }
+        return res.ok(queue);
+      })
+      .catch(err => res.serverError(err));
+  },
+  joinRoom: function(req, res) {
+    const roomId = req.params.id;
+    console.log('roomId',req.params.id);
+    sails.socket.join(req, `room:${roomId}`, function(err) {
+      if(err) {
+        return res.serverError(err);
+      }
+      sails.sockets.broadcast(`room:${roomId}`, 'test');
+      return res.ok('success');
+    });
+
   }
 };
 

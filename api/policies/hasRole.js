@@ -10,8 +10,16 @@
  */
 module.exports = (roles) => {
   return (req, res, next) => {
-    if(!req.token) return res.serverError({message: 'token attribute in request is not found'});
-    if(roles.some(role => req.token.role === role)) return next();
-    else return res.forbidden({message: 'Forbidden'});
+    if(req.isSocket) {
+      next();
+    }
+    else{
+      if(!req.token) return res.serverError({message: 'token attribute in request is not found'});
+      if(roles.some(role => req.token.role === role)) {
+        console.log('allow user email:',req.token.email,' role ', req.token.role);
+        return next();
+      }
+      else return res.forbidden({message: 'Forbidden'});
+    }
   };
 };

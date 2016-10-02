@@ -92,9 +92,10 @@ module.exports.policies = {
   //   update : ['tokenAuth', hasRole (['admin'])],
   //   delete : ['tokenAuth', hasRole (['admin'])]
   // },
-  // QueueController : {
-  //   '*' : ['tokenAuth', hasRole(['admin','nurse'])]
-  // },
+  QueueController : {
+    '*' : ['tokenAuth', hasRole(['admin','nurse'])],
+    'searchByCurrentPatient' : ['tokenAuth', hasRole(['patient'])]
+  },
   // RoleController : {
   //   '*' : ['tokenAuth', hasRole(['admin'])]
   // },
