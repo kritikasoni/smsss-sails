@@ -15,6 +15,9 @@ module.exports = (roles) => {
       console.log('allow user email:',req.token.email,' role ', req.token.role);
       return next();
     }
-    else return res.forbidden({message: 'Forbidden'});
+    else {
+      console.log('user role', req.token.role, 'is not in ',roles);
+      return res.forbidden({message: 'Forbidden'});
+    }
   }
 };
