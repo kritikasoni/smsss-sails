@@ -92,7 +92,7 @@ module.exports = {
             return res.serverError(err);
           }
           sails.sockets.broadcast(`room:${roomId}`, 'patient joined');
-          return res.ok('success');
+          return res.ok(queue);
         });
       })
       .catch(err => res.serverError(err));
