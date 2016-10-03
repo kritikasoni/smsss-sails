@@ -34,7 +34,7 @@ module.exports = {
       .then(queue => Queue.findOne({id: queue.id}).populateAll())
       .then(queue => {
         Queue.publishCreate(queue, req);
-        sails.sockets.broadcast('waitingRoom', 'addQueue', {userId: queue.patient});
+        sails.sockets.broadcast('waitingRoom', 'addQueue', {userId: queue.patient.id});
         return res.created(queue);
       })
       .catch(err => res.badRequest(err));
@@ -82,17 +82,16 @@ module.exports = {
       return res.json(400,{message: 'Request is not web socket!'})
     }
     Queue
-      .findOne({patient: patientId})
+      .findOne({patient: patientId}).populate('room')
       .then(queue => {
         if(!queue){
           return res.json(404,{message: 'No queue found'});
         }
-        const roomId = queue.id;
+        const roomId = queue.room.id;
         sails.sockets.join(req, `room:${roomId}`, function(err) {
           if(err) {
             return res.serverError(err);
           }
-          sails.sockets.broadcast(`room:${roomId}`, 'patient joined');
           return res.ok(queue);
         });
       })
