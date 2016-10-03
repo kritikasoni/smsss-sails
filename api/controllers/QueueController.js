@@ -35,7 +35,7 @@ module.exports = {
       .then(queue => {
         Queue.publishCreate(queue, req);
         sails.sockets.broadcast('waitingRoom', 'addQueue', {userId: queue.patient});
-        return res.created(queue.populate('room'));
+        return res.created(queue);
       })
       .catch(err => res.badRequest(err));
   },
