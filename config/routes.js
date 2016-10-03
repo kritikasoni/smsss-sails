@@ -97,6 +97,7 @@ module.exports.routes = {
    * Queue routes
    */
   'get /queues/joinCurrentRoom' : 'QueueController.joinCurrentRoom',
+  'get /queues/joinWaitingRoom' : 'QueueController.joinWaitingRoom',
   'get /queues/searchByRoom/:id' : 'QueueController.searchByRoom',
   'get /queues'   : 'QueueController.findAll',
   'get /queues/:id' : 'QueueController.findById',

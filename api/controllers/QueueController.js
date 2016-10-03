@@ -78,7 +78,7 @@ module.exports = {
   joinCurrentRoom: function(req, res) {
     const patientId = req.token.sub;
     if(!req.isSocket){
-      return res.json(401,{message: 'Request is not web socket!'})
+      return res.json(400,{message: 'Request is not web socket!'})
     }
     Queue
       .findOne({patient: patientId})
@@ -96,6 +96,17 @@ module.exports = {
         });
       })
       .catch(err => res.serverError(err));
+  },
+  joinWaitingRoom: (req, res, next) => {
+    if(!req.isSocket){
+      return res.json(400,{message: 'Request is not web socket!'})
+    }
+    sails.sockets.join(req, 'waitingRoom', function(err) {
+      if(err) {
+        return res.serverError(err);
+      }
+      return res.ok('success');
+    });
   }
 };
 
