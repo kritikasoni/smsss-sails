@@ -94,8 +94,9 @@ module.exports.policies = {
   // },
   QueueController : {
     '*' : ['tokenAuth', hasRole(['admin','nurse'])],
-    'joinCurrentRoom' : ['tokenAuth', hasRole(['patient'])]
-  },
+    'joinCurrentRoom' : ['tokenAuth', hasRole(['patient'])],
+    'joinWaitingRoom' : ['tokenAuth', hasRole(['patient'])]
+},
   // RoleController : {
   //   '*' : ['tokenAuth', hasRole(['admin'])]
   // },
