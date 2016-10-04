@@ -29,6 +29,14 @@ module.exports = {
       columnName: 'fk_queue_room',
       model:'room',
       required : true
+    },
+    status: {
+      columnName: 'fk_queue_status',
+      model: 'queueStatus',
+      required: false,
+      defaultsTo: function () {
+        return 1; // suppose that 1 is waiting status
+      }
     }
   },
   validationMessages: {
@@ -41,7 +49,7 @@ module.exports = {
     room: {
       required: 'Room is required'
     }
-    
+
   }
 };
 
