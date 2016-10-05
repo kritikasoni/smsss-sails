@@ -8,15 +8,19 @@ module.exports = {
   },
   sortQueueInRoom: function(roomId) {
     return new Promise((resolve, reject) => {
-      allQueues.find((queue) => {
-        return room
-      })
+      const targetRoom = allRooms.find((room) =>  room.id == roomId);
+
+      if(!targetRoom){ // if not found, then throw error
+        return reject(new Error("There is no queue in room"));
+      }
+      else {
+        targetRoom.queues;
+      }
     });
   },
-  getQueueInRoom: (req, res, id) => {
-    if(!req.token) return res.serverError({message: 'token attribute in request is not found'});
-    if(req.token.sub != parseInt(id) ) return res.forbidden({message: 'Forbidden'});
-    else return true;
+  broadcastQueueInRoom: (roomId) => {
+    const targetRoom = allRooms.find((room) =>  room.id == roomId);
+    sails.sockets.broadcast(`roomId:${roomId}`, 'changeInQueue', targetRoom.queues);
   }
 
 };
