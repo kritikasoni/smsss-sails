@@ -15,8 +15,8 @@ describe('PriorityQueueComparatorTest', function() {
       const queue3 = {time: moment().year(2016).month('Aug').date(29).hour(21).minute(15).second(30),
         room: 2, priority: 15.5, status: QueueStatus.IN_QUEUE, patient: 3
       };
-      const piorityQueueComparator = new PriorityQueueComparator();
-      assert.equal(piorityQueueComparator.compare(queue1, queue2), 7, 'should get positive number of 7')
+      const priorityQueueComparator = new PriorityQueueComparator();
+      assert.equal(priorityQueueComparator.compare(queue1, queue2), 7, 'should get positive number of 7')
 
       done();
     });
