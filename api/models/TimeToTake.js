@@ -7,6 +7,8 @@
 
 module.exports = {
   tableName: 'time_to_take',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     id: {
       columnName: 'ttt_id',

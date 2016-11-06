@@ -27,6 +27,10 @@ module.exports = {
       columnName: 'fk_pres_doctor',
       model:'staff',
       required : true
+    },
+    medicinePrescription: {
+      collection: 'medicinePrescription',
+      via: 'prescription'
     }
   },
   validationMessages: {

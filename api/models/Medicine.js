@@ -7,6 +7,8 @@
 
 module.exports = {
   tableName: 'medicines',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
     id: {
       columnName: 'med_id',
@@ -44,6 +46,13 @@ module.exports = {
       minLength: 3,
       maxLength: 256
     },
+    isPill: {
+      columnName: 'med_is_pill',
+      type: 'boolean',
+      defaultsTo: function () {
+        return true;
+      }
+    }
 
   },
   validationMessages: {

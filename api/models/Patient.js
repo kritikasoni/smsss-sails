@@ -80,7 +80,7 @@ module.exports = {
       type: 'string',
       minLength: 5,
       maxLength: 7,
-      regex: '/^\d{2,3}\/\d{2,3}$/'
+      regex: /^\d{2,3}\/\d{2,3}$/
     },
     password:{
       columnName: 'patient_password',
@@ -88,6 +88,14 @@ module.exports = {
       required : true,
       minLength: 6,
       maxLength: 20
+    },
+    deviceToken: {
+      columnName: 'patient_deviceToken',
+      type: 'string',
+      required: false,
+      defaultsTo: function () {
+        return ''; // default to no token
+      }
     },
 
     toJSON: function () {

@@ -8,6 +8,7 @@
 
 module.exports = {
   tableName: 'medicines_prescriptions',
+  autoCreatedAt: false,
   attributes: {
     id: {
       columnName: 'medPres_id',
@@ -20,13 +21,26 @@ module.exports = {
       columnName: 'medPres_dosage',
       type: 'integer',
       required : true ,
-
+    },
+    amount: {
+      columnName: 'medPres_amount',
+      type: 'integer',
+      required : false,
+      defaultsTo: function () {
+        return null;
+      }
+    },
+    isTaking: {
+      columnName: 'medPres_is_taking',
+      type: 'boolean',
+      defaultsTo: function () {
+        return true;
+      }
     },
     timeToTake: {
       columnName: 'fk_medPres_timeToTake',
-      type: 'string',
+      model: 'timeToTake',
       required : true ,
-
     },
     remark: {
       columnName: 'medPres_remark',

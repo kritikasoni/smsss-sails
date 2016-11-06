@@ -23,11 +23,6 @@ module.exports = {
       required : true ,
 
     },
-    room:{
-      columnName: 'fk_app_room',
-      model:'room',
-      required : true
-    },
     patient:{
       columnName: 'fk_app_patient',
       model:'patient',
@@ -42,9 +37,6 @@ module.exports = {
   validationMessages: {
     date: {
       required: 'Date is required',
-    },
-    room: {
-      required: 'Room is required',
     },
     patient: {
       required: 'Patient is required',

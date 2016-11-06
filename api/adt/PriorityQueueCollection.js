@@ -7,29 +7,54 @@ class PriorityQueueCollection {
     this._queueCollection = [];
   }
   enqueue(queue) {
-    const index = this._queueCollection.findIndex(q => this._comparator.compare(q,queue) >= 0);
-    if(!index) this._queueCollection.push(queue);
-    else{
-      //insert after the higher one
-      this.insert(queue,index + 1);
+    let targetIndex = this._queueCollection.length;
+    for(let i = this._queueCollection.length - 1; i >= 0; i--){
+      // sails.log.debug('compare queue in index',i,':',this._queueCollection[i],'and',queue);
+      // sails.log.debug('result',this._comparator.compare(this._queueCollection[i],queue));
+      if(this._comparator.compare(this._queueCollection[i],queue) > 0){
+        // sails.log.debug('index is now',i);
+        targetIndex = i;
+      }
+      else{
+        break;
+      }
     }
+    if(this._queueCollection.length == 0){
+      this._queueCollection.push(queue);
+      ++targetIndex;
+      this._size++;
+      return targetIndex;
+    }
+    else if(targetIndex == 0){
+      this.insert(queue,targetIndex + 1);
+      return targetIndex + 1;
+    }
+    else {
+      //insert after the higher one
+      this.insert(queue,targetIndex);
+      return targetIndex;
+    }
+
   }
 
   dequeue() {
     const dequeued = this._queueCollection.shift();
+    this._size--;
     return dequeued ? dequeued : null;
   }
   peek() {
     return this._queueCollection[0];
   }
   remove(queue) {
-    if(this.contains(queue)){
-      this.removeAt(this.contains(queue));
+    const removeIndex = this.contains(queue);
+    if(removeIndex > -1){
+      this.removeAt(removeIndex);
     }
   }
   removeAt(index) {
     const temp = this._queueCollection[index] ? Object.assign({},this._queueCollection[index]) : null;
     this._queueCollection.splice(index,1);
+    this._size--;
     return temp;
   }
   clear () {
@@ -38,9 +63,10 @@ class PriorityQueueCollection {
   }
   insert(queue, index) {
     this._queueCollection.splice(index,0,queue);
+    this._size++;
   }
   contains(queue) {
-    return this._queueCollection.findIndex(queue.equals);
+    return this._queueCollection.findIndex(q => {return q.equals(queue);});
   }
   sort() {
     this._queueCollection = this._queueCollection.sort((queueA,queueB) => this._comparator.compare(queueA,queueB));

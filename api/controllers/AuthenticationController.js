@@ -19,6 +19,7 @@ module.exports = {
       });
   },
   patientLogin: (req,res) => {
+    sails.log.info('user', req.body.email,'is logging in');
     if(!req.body.email || !req.body.password)
       return res.badRequest({message:'email and password are required'});
     AuthenticationService

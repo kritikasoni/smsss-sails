@@ -96,14 +96,20 @@ module.exports.routes = {
   /*
    * Queue routes
    */
+
   'get /queues/joinCurrentRoom' : 'QueueController.joinCurrentRoom',
   'get /queues/joinWaitingRoom' : 'QueueController.joinWaitingRoom',
-  'get /queues/searchByRoom/:id' : 'QueueController.searchByRoom',
+  'get /queues/callQueue/:roomId' : 'QueueController.callQueue',
+  'get /queues/allQueueInRoom/:roomId' : 'QueueController.allQueueInRoom',
+  'get /queues/patient/:id' : 'QueueController.findByPatientId',
   'get /queues'   : 'QueueController.findAll',
-  'get /queues/:id' : 'QueueController.findById',
+  'get /queues/:id' : 'QueueController.findByQueueId',
   'post /queues'   : 'QueueController.create',
+  'post /queues/insert/:queueIndex' : 'QueueController.insertQueue',
   'put /queues/:id'    : 'QueueController.update',
+  'delete /queues/all' : 'QueueController.clearAllQueues',
   'delete /queues/:id'  :'QueueController.delete',
+  'delete /queues/room/:id' : 'QueueController.clearAllQueuesInRoom',
 
 
 
@@ -117,7 +123,10 @@ module.exports.routes = {
   /*
    * PatientController
    */
+  'get /patients/search/idCardNo/notInQueue' : 'PatientController.searchByIdCardNoAndNotInQueue',
+  'get /patients/search/idCardNo/notInQueue/:idCardNo' : 'PatientController.searchByIdCardNoAndNotInQueue',
   'get /patients/search/idCardNo/:idCardNo' : 'PatientController.searchByIdCardNo',
+
 
   /*
    * MedicineController

@@ -33,9 +33,9 @@ module.exports = function(req, res, next) {
   }
 
   jwt.verify(token, jwtSecret, function (err, token) {
-    if (err) return res.json(401,{message: 'Invalid Token!'});
+    if (err) return res.json(401,{message: 'Invalid Token! Please login again'});
     req.token = token; // This is the decrypted token or the payload you provided
-    console.info('user',token.email,' make a request');
+    sails.log.info('user',token.email,' make a request');
     next();
   });
 
