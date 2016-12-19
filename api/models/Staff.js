@@ -41,7 +41,8 @@ module.exports = {
       type:'string',
       required : true,
       minLength: 6,
-      maxLength: 20
+      maxLength: 20,
+      regex: /^[a-zA-Z0-9!@#$%^&*]$/
     },
     position:{
       columnName: 'staff_position',
@@ -97,6 +98,7 @@ module.exports = {
       minLength: 'Password must be longer than 6 characters',
       maxLength: 'Password must be less than 20 characters',
       required: 'Password is required',
+      regex: 'Password must consists of a-z,A-Z,0-9 or special character(!@#$%^&*)'
     },
     position: {
       required: 'Position is required',

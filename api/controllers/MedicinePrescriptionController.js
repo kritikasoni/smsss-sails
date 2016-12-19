@@ -1,22 +1,22 @@
 'use strict';
 /**
- * PrescriptionController
+ * medicinePrescriptionController
  * @description :: Server-side logic for managing doctors
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-/* global Prescription */
+/* global MedicinePrescription */
 module.exports = {
   findAll: (req,res) => {
-    Prescription
+    MedicinePrescription
       .find()
       .populateAll()
-      .then(prescriptions => res.json(prescriptions))
+      .then(medicinesPrescriptions => res.json(medicinesPrescriptions))
       .catch(err => res.serverError(err));
   },
   findById: (req,res) => {
-    Prescription
+    MedicinePrescription
       .findOne({id:req.params.id}).populateAll()
-      .then(prescription => res.json(prescription))
+      .then(medicinePrescription => res.json(medicinePrescription))
       .catch(err => res.badRequest(err));
   },
   findAllByPrescriptionId : (req, res) => {
@@ -26,40 +26,24 @@ module.exports = {
       .catch(err => res.badRequest(err));
   },
   create: function (req, res) {
-    let prescription = req.body;
-    Staff
-      .findOne({id:req.body.doctor})
-      .then(doctor => {
-        if(!doctor) throw new Error('Doctor not found');
-        return doctor;
-      })
-      .then(() => {
-        Patient.findOne({id:req.body.patient}).then(patient => {
-          if(!patient) throw new Error('Patient not found');
-          return patient;
-        })
-      })
-      .then(() => Prescription.create(prescription))
-      .then(prescription => Prescription.findOne({id:prescription.id}).populateAll())
-      .then(prescription => res.created(prescription))
+    let medicinePrescription = req.body;
+    MedicinePrescription
+      .create(medicinePrescription)
+      .then(medicinePrescription => MedicinePrescription.findOne({id:medicinePrescription.id}).populateAll())
+      .then(medicinePrescription => res.created(medicinePrescription))
       .catch(err => res.badRequest(err));
   },
 
   update: function (req, res) {
-    Prescription
+    MedicinePrescription
       .update({id:req.params.id}, req.body, (err, updated) => {
-        if(err) return res.json(err);
+        if(err) return res.badRequest(err);
         return res.ok(updated);
       });
   },
   delete: function (req,res){
-    Prescription.destroy({id:req.params.id})
-      .then(() => {
-        return MedicinePrescription.destroy({prescription: req.params.id})
-      })
-      .then(() => {
-        return res.ok({message:'success'});
-      })
+    MedicinePrescription.destroy({id:req.params.id})
+      .then(() => res.json({message:'success'}))
       .catch(err => res.badRequest(err));
   }
 };

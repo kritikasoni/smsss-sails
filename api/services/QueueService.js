@@ -108,14 +108,14 @@ const queueService = {
       }
     });
   },
-  callQueue: function (roomId) {
+  callQueue: function (roomId, withPatientIndex) {
     return new Promise((resolve, reject) => {
       queueService.getRoomByRoomId(roomId).then(targetRoom => {
         sails.log.info('callQueue: room', targetRoom);
-        const thirdPatient = targetRoom.getQueues().getCollection()[3];
         const firstPatient = targetRoom.getQueues().getCollection()[1];
+        const withPatient = withPatientIndex ? targetRoom.getQueues().getCollection()[withPatientIndex] : null;
         const removed = targetRoom.getQueues().dequeue();
-        sails.log.info('call queue',removed);
+        sails.log.debug('remove queue',removed);
 
         queueService.publish({type: 'queues:moving',data: {roomId: roomId}});
         // if there is next queue, then set status to current
@@ -123,8 +123,13 @@ const queueService = {
           targetRoom.getQueues().peek().status = QueueStatus.CURRENT;
         }
 
-        if(firstPatient || thirdPatient){
-          const notificationList = [queueService.sendNotification(firstPatient), queueService.sendNotification(thirdPatient)]
+        if(firstPatient || withPatient){
+          sails.log.debug('has first queue or other queue');
+          let notificationList = [queueService.sendNotification(firstPatient)];
+          if(withPatient){
+            notificationList.push(withPatient);
+          }
+          sails.log.debug('notification list', notificationList);
           Promise.all(notificationList).then(result => {
             resolve();
           }).catch(err => {
@@ -133,7 +138,7 @@ const queueService = {
           })
         }
         else{
-          sails.log.info('callQueue: no queue to send notification found');
+          sails.log.debug('callQueue: no queue to send notification found');
           resolve();
         }
       }).catch(err => {
@@ -290,16 +295,17 @@ const queueService = {
   sendNotification: function (queue) {
     return new Promise((resolve, reject) => {
       if(queue){
-        sails.log.info('callQueue: found patient to send notification in queue');
+        sails.log.debug('callQueue: found patient to send notification in queue');
         Patient.findOne({id: queue.patientId}).then(patient => {
           if(patient){
             let message = Object.assign({}, sails.config.notification.defaultMessage);
             if(patient.deviceToken){
-              sails.log.info('callQueue: ready to send to patient',patient.firstName,patient.lastName);
+              sails.log.debug('callQueue: ready to send to patient',patient.firstName,patient.lastName);
               message.to = patient.deviceToken;
+              sails.log.debug('message', message);
               FCM.post('send',message).then(result => {
-                sails.log.info('sent notification to patient',patient.firstName,patient.lastName);
-                sails.log.info(result.data);
+                sails.log.debug('sent notification to patient',patient.firstName,patient.lastName);
+                sails.log.debug(result.data);
                 resolve();
               })
                 .catch(error => {
@@ -307,7 +313,7 @@ const queueService = {
                 });
             }
             else{
-              sails.log.info('callQueue: no device token, send notification failed');
+              sails.log.debug('callQueue: no device token, send notification failed');
               resolve();
             }
           }

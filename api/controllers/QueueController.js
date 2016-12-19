@@ -129,7 +129,11 @@ module.exports = {
   },
   callQueue: (req,res) => {
     const roomId = req.params.roomId;
-    QueueService.callQueue(roomId).then(result => {
+    let patientIndex = req.query.patientIndex || null;
+    if(patientIndex) { //if want to call first queue, then ignore because call queue call first queue by default
+      patientIndex = patientIndex <= 1 ? null : patientIndex;
+    }
+    QueueService.callQueue(roomId, patientIndex).then(result => {
       return res.ok({message:'Call success!'});
     })
       .catch(err => {
@@ -267,6 +271,7 @@ module.exports = {
   clearAllQueues: (req,res) => {
     sails.log.info('clearAllQueues: clear all');
     QueueService.clearAll();
+    sequence = 1;
     return res.ok({message:'Cleared'});
   }
 };

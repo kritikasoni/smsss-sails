@@ -157,8 +157,8 @@ describe('PatientController', function() {
       const patient = {
         firstName: 'Chanwit',
         lastName: 'Pingmuang',
-        email: 'Chanwit.got7@hotmail.com',
-        password: 'ilovegot7',
+        email: 'Chanwit.got7@gmail.com',
+        password: '1234gtbn',
         idCardNo: '3421100456782',
         dob: '1994-08-27T18:44:01.111Z',
         height: '48',

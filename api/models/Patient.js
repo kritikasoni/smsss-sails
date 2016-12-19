@@ -56,7 +56,6 @@ module.exports = {
       columnName: 'patient_weight',
       type:'float',    //weight
       required : true,
-
       min: 1,
       max: 500
     },
@@ -87,7 +86,8 @@ module.exports = {
       type:'string',
       required : true,
       minLength: 6,
-      maxLength: 20
+      maxLength: 20,
+      regex: /^[a-zA-Z0-9!@#$%^&*]$/
     },
     deviceToken: {
       columnName: 'patient_deviceToken',
@@ -96,6 +96,12 @@ module.exports = {
       defaultsTo: function () {
         return ''; // default to no token
       }
+    },
+    heartRate: {
+      columnName: 'patient_heartRate',
+      type: 'integer',
+      min: 1,
+      max: 200
     },
 
     toJSON: function () {
@@ -164,6 +170,11 @@ module.exports = {
       minLength: 'Password must be longer than 6 characters',
       maxLength: 'Password must be less than 20 characters',
       required: 'Password is required',
+      regex: 'Password must consists of a-z,A-Z,0-9 or special character(!@#$%^&*)'
+    },
+    heartRate: {
+      min: 'Heart rate should be from 1 bpm to 200 bpm',
+      max: 'Heart rate should be from 1 bpm to 200 bpm'
     },
   },
   beforeCreate: function(patient, cb) {

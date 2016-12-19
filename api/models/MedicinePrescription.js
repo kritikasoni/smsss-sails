@@ -27,7 +27,7 @@ module.exports = {
       type: 'integer',
       required : false,
       defaultsTo: function () {
-        return null;
+        return 1;
       }
     },
     isTaking: {
