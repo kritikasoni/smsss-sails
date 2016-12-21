@@ -127,7 +127,7 @@ const queueService = {
           sails.log.debug('has first queue or other queue');
           let notificationList = [queueService.sendNotification(firstPatient)];
           if(withPatient){
-            notificationList.push(withPatient);
+            notificationList.push(queueService.sendNotification(withPatient));
           }
           sails.log.debug('notification list', notificationList);
           Promise.all(notificationList).then(result => {
@@ -299,7 +299,7 @@ const queueService = {
         Patient.findOne({id: queue.patientId}).then(patient => {
           if(patient){
             let message = Object.assign({}, sails.config.notification.defaultMessage);
-            if(patient.deviceToken){
+            if(patient.deviceToken && (patient.deviceToken != 0)){
               sails.log.debug('callQueue: ready to send to patient',patient.firstName,patient.lastName);
               message.to = patient.deviceToken;
               sails.log.debug('message', message);

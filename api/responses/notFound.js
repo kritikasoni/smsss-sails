@@ -19,7 +19,7 @@
 const path = require('path');
 module.exports = function notFound (data, options) {
 
-  
+
   var req = this.req;
   var res = this.res;
   var sails = req._sails;
@@ -89,6 +89,9 @@ module.exports = function notFound (data, options) {
   //
   //   return res.send(html);
   // });
-  else return res.sendfile(path.join(__dirname,'..','..','.tmp','public', 'index.html'));
+  else {
+    sails.log.debug('serve index.html rather than 404');
+    return res.sendfile(path.join(__dirname,'..','..','.tmp','public', 'index.html'));
+  }
 };
 
