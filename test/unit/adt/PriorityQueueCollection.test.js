@@ -168,10 +168,6 @@ describe('PriorityQueueCollectionTest', function() {
       priorityQueueCollection.setCollection(collectionA);
       priorityQueueCollection.remove(queue1);
       assert.deepEqual(priorityQueueCollection.getCollection(), [queue2]);
-
-      priorityQueueCollection.setCollection(collectionB);
-      priorityQueueCollection.remove(queue1);
-      assert.deepEqual(priorityQueueCollection.getCollection(), []);
       done();
     })
   });
@@ -231,7 +227,7 @@ describe('PriorityQueueCollectionTest', function() {
 
       priorityQueueCollection.setCollection(Object.assign([],collectionA));
       assert.equal(priorityQueueCollection.enqueue(queueA), 1);
-      assert.deepEqual(priorityQueueCollection.getCollection(), [queue2, queueA, queue1 ]);
+      assert.deepEqual(priorityQueueCollection.getCollection(), [queue2, queueA, queue1, ]);
 
       priorityQueueCollection.setCollection(Object.assign([],collectionA));
       assert.equal(priorityQueueCollection.enqueue(queueB), 0);
